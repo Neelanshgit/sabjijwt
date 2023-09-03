@@ -26,7 +26,8 @@ import com.sabji.model.JwtResponse;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("auth")
-public class JwtAuthenticationController {
+public class JwtAuthenticationController
+ {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
