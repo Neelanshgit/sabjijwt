@@ -19,6 +19,7 @@ public class FarmerInfoEntity {
 	@NotNull
 	private String driverName;
 	
+	
 	private String transportname;
 	
 	private int age;
