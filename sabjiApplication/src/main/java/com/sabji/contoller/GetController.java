@@ -1,32 +1,43 @@
 package com.sabji.contoller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sabji.entity.FarmerInfoEntity;
+import com.sabji.entity.Items;
+import com.sabji.entity.VegetableEntity;
+import com.sabji.services.ItemService;
 
  
 
 @RestController
 public class GetController {
 	
+	@Autowired
+	ItemService itemService;
+	
 	@GetMapping("/findItems")
-	public String findAllItems(){
+	public List<Items> findAllItems(){
 		
-		return "hi hellp";
+		return  itemService.getallItems();
 		
 	}
 	
 	@GetMapping("/findVegatable")
-	public String findVegatableDetail(){
+	public List<VegetableEntity> findVegatableDetail(){
 		
-		return "hi hellp";
+		return itemService.getallVegetableDetail();
 		
 	}
 
 	
 	@GetMapping("/findFarmer")
-	public String findFarmerDetail(){
+	public List<FarmerInfoEntity> findFarmerDetail(){
 		
-		return "hi hellp";
+		return itemService.getallFarmardetail();
 		
 	}
 
