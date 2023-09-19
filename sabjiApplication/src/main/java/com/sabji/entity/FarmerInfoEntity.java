@@ -4,11 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.lang.NonNull;
 
 @Entity
+@Table(name="delvery_partners")
 public class FarmerInfoEntity {
 	
 	@Id

@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,12 +27,15 @@ import com.sabji.model.ResponseWithFileCode;
 import com.sabji.services.BlobService;
 import com.sabji.util.FileProtectCheck;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("api")
+@Tag(name="File-Controller")
 public class BlobController {
 
 	@Autowired
@@ -42,12 +47,12 @@ public class BlobController {
 	
 	List<String> allowedContentType= Arrays.asList("application/pdf","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/rtf","application/vnd.ms-excel");
 	
-	@RequestMapping(value = "/hi")
+	@GetMapping(value = "/hi")
 	public ResponseEntity<String> test() {
 		return ResponseEntity.ok("its in air");
 	}
 
-	@RequestMapping(value = "/singlefile")
+	@PostMapping(value = "/singlefile")
 	public ResponseEntity<Object> ImageSaver(@RequestParam("appCode") String appCode,@RequestParam("fileCode") String fileCode ,
 			@RequestParam("file") MultipartFile file,
 			@RequestParam("moduleCode") String moduleCode, ModelMap map) {
@@ -76,7 +81,7 @@ public class BlobController {
 		}
 
 	}
-	@RequestMapping(value = "/mFI2")
+	@PostMapping(value = "/mFI2")
 	public ResponseEntity<Object> ImageSaverArray3(@RequestParam("appCode") String appCode,
 			@RequestParam("file") MultipartFile[] dataSet, @RequestParam("moduleCode") String moduleCode,
 			@RequestParam("fileCode") String[] fileCode, ModelMap map) {
@@ -150,7 +155,7 @@ public class BlobController {
 
 	}
 
-   @RequestMapping(value = "/mFI3")
+	@PostMapping(value = "/mFI3")
 	public ResponseEntity<Object> ImageSaverArray4(@RequestParam("appCode") String appCode,
 			@RequestParam("file") List<MultipartFile> dataSet,  @RequestParam("moduleCode") String moduleCode,
 			@RequestParam("fileCode") List<String> fileCode, ModelMap map) {
@@ -224,7 +229,7 @@ public class BlobController {
 	}
 
 
-	@RequestMapping(value = "/dowloadContent")
+	@PostMapping(value = "/dowloadContent")
 	public ResponseEntity<Object> ApiForDownload(@RequestParam("fileCode") String fileCode,@RequestParam("module") String module) {
 
 		System.out.println(fileCode);
@@ -233,7 +238,7 @@ public class BlobController {
 		return ResponseWithFCDwonload2.generateResponse("Success", HttpStatus.OK, "200", filebytes);
 
 	}
-	@RequestMapping(value = "/dowloadbytes")
+	@PostMapping(value = "/dowloadbytes")
 	public ResponseEntity<Object> ApiForDownload1(@RequestParam("fileCode") String fileCode,@RequestParam("module") String module) {
 
 		System.out.println(fileCode);
@@ -242,7 +247,7 @@ public class BlobController {
 		return ResponseWithFCDwonload.generateResponse("Success", HttpStatus.OK, "200", filebytes);
 
 	}
-	@RequestMapping(value = "/dowloadpurebytes")
+	@PostMapping(value = "/dowloadpurebytes")
 	public ResponseEntity<Object> ApiForDownload3(@RequestParam("fileCode") String fileCode,@RequestParam("module") String module) {
 
 		System.out.println(fileCode);
@@ -252,7 +257,7 @@ public class BlobController {
 
 	}
 
-	@RequestMapping(value = "/fileSearch")
+	@PostMapping(value = "/fileSearch")
 	public ResponseEntity<Object> ApiForSearch(@RequestParam("appCode") String appCode,@RequestParam("module") String module) {
 
 		System.out.println(appCode);
@@ -273,7 +278,7 @@ public class BlobController {
 	}
 
 	
-	@RequestMapping(value = "/fileSearchbyFileCode")
+	@PostMapping(value = "/fileSearchbyFileCode")
 	public ResponseEntity<Object> ApiForSearchwith(@RequestParam("appCode") String appCode,@RequestParam("fileCode") String fileCode,
 			@RequestParam("module") String module) {
 

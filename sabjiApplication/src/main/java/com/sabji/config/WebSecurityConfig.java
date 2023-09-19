@@ -33,6 +33,7 @@ public class WebSecurityConfig {
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
+	public String[] allowedUrl = { "/auth/**", "/swagger-ui/**", "/v3/api-docs/**" };
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -58,7 +59,7 @@ public class WebSecurityConfig {
 	 @Bean
 	  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		 http.cors().and() 
-			 .csrf().disable().authorizeRequests().antMatchers("/auth/**").permitAll().
+			 .csrf().disable().authorizeRequests().antMatchers(allowedUrl).permitAll().
 			  anyRequest().authenticated().and().
 			 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
