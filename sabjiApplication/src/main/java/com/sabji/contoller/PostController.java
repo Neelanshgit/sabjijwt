@@ -49,21 +49,6 @@ public class PostController {
 		 
 	}
 	 
-	 
- 
-//	@PostMapping("/addVegetable")
-//	public ResponseEntity<?> uploadImage(@RequestBody VegetableEntity ventity) {
-//        try {
-//             
-//
-//          itms.VegetableService(ventity);
-//
-//            return ResponseEntity.status(HttpStatus.OK).body("Image uploaded successfully");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading the image");
-//        }
-//    }
-	
 	@PostMapping("/upload")
     public VegetableEntity uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("vegName") String vegName,
     		@RequestParam("time") String time) throws IOException 
@@ -79,9 +64,11 @@ public class PostController {
 	}
 	
 	@PostMapping("/driverDetails")
-	public FarmerInfoEntity uploadImage(@ModelAttribute FarmerInfoEntity farmarentity) {
+	public ResponseEntity<?> uploadImage(@ModelAttribute FarmerInfoEntity farmarentity) {
 		
-		return itms.farmerService(farmarentity);
+//		return itms.farmerService(farmarentity);
+		
+		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", farmarentity) ;
 	
 	}
 }	 
