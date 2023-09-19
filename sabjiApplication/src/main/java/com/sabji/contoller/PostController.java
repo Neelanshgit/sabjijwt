@@ -7,8 +7,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartException;
@@ -17,12 +20,19 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sabji.entity.FarmerInfoEntity;
 import com.sabji.entity.Items;
 import com.sabji.entity.VegetableEntity;
+import com.sabji.model.ResponseWithList;
+import com.sabji.model.ResponseWithObject;
 import com.sabji.services.ItemService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
  
 
  
 
 @RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("api")
+@Tag(name="For-Post-Data")
 public class PostController {
 	
 	@Autowired
@@ -30,19 +40,16 @@ public class PostController {
 	
 
 	@PostMapping("/addItems")
-	public ResponseEntity<?> addItems(@Valid @RequestBody Items itemname)
+	public ResponseEntity<?> addItems(@Valid @ModelAttribute Items itemname)
 	{
-	try {
-		if(itemname==null) {
-			throw new MultipartException("some parameter is mission");
-			}
-		  itms.itemservice(itemname);
-		return ResponseEntity.status(HttpStatus.OK).body("Items added successfully");
+	 
+		itemname =	itms.itemservice(itemname);
+ 		  
+		 return  new ResponseWithObject().generateResponse("", HttpStatus.OK, "", itemname);
+		 
 	}
-	catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error to added the product");
-    }
-	}
+	 
+	 
  
 //	@PostMapping("/addVegetable")
 //	public ResponseEntity<?> uploadImage(@RequestBody VegetableEntity ventity) {
@@ -58,33 +65,24 @@ public class PostController {
 //    }
 	
 	@PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("vegName") String vegName,
-    		@RequestParam("time") String time) 
+    public VegetableEntity uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("vegName") String vegName,
+    		@RequestParam("time") String time) throws IOException 
 	{
-        try {
+        
             VegetableEntity image = new VegetableEntity();
              image.setPic(file.getBytes());
              image.setVegetableName(vegName);
              image.setTimeperiod(time);
             itms.VegetableService(image);
-            return ResponseEntity.ok("Image uploaded successfully");
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Failed to upload image: " + e.getMessage());
-        }
+            return itms.VegetableService(image);
+         
 	}
 	
 	@PostMapping("/driverDetails")
-	public ResponseEntity<?> uploadImage(@RequestBody FarmerInfoEntity farmarentity) {
+	public FarmerInfoEntity uploadImage(@ModelAttribute FarmerInfoEntity farmarentity) {
 		
-        try {
-             itms.farmerService(farmarentity);
-            return ResponseEntity.status(HttpStatus.OK).body("Data uploaded successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error to add the data");
-        }
-    }
+		return itms.farmerService(farmarentity);
 	
 	}
-		 
+}	 
  

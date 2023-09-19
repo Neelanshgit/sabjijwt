@@ -1,32 +1,59 @@
 package com.sabji.contoller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sabji.entity.FarmerInfoEntity;
+import com.sabji.entity.Items;
+import com.sabji.entity.VegetableEntity;
+import com.sabji.model.ResponseWithList;
+import com.sabji.services.ItemService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 
  
 
 @RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("api")
+@Tag(name="For-Getting-Data")
 public class GetController {
 	
+	@Autowired
+	ItemService itemService;
+	
 	@GetMapping("/findItems")
-	public String findAllItems(){
+	public ResponseEntity<?> findAllItems(){
 		
-		return "hi hellp";
+		List<Items> items =	itemService.getallItems();
+		
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", items) ;
 		
 	}
 	
 	@GetMapping("/findVegatable")
-	public String findVegatableDetail(){
+	public ResponseEntity<?> findVegatableDetail(){
 		
-		return "hi hellp";
+		List<VegetableEntity> vegetableEntities	 = itemService.getallVegetableDetail();
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", vegetableEntities) ;
+		
+		
 		
 	}
 
 	
 	@GetMapping("/findFarmer")
-	public String findFarmerDetail(){
+	public ResponseEntity<?> findFarmerDetail(){
 		
-		return "hi hellp";
+		List<FarmerInfoEntity>  farmerInfoEntities =  itemService.getallFarmardetail();
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", farmerInfoEntities) ;
 		
 	}
 

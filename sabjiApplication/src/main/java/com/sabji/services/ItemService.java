@@ -1,5 +1,7 @@
 package com.sabji.services;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,18 @@ public interface ItemService {
 	public FarmerInfoEntity farmerService(FarmerInfoEntity farmerentity);
 	
 	public VegetableEntity VegetableService(VegetableEntity vegetablentity);
+	
+	public List<Items> getallItems();
+	
+	public List<Items> getItemsById();
+	
+	public List<FarmerInfoEntity> getallFarmardetail();
+	
+	public List<FarmerInfoEntity> getFarmerdetailById();
+	
+	public List<VegetableEntity> getallVegetableDetail();
+	
+	public List<VegetableEntity> getVegetableDetailById();
+	
 
 }

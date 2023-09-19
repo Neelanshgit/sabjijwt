@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +14,12 @@ import com.sabji.entity.DetailsOfUser;
 import com.sabji.entity.GdmsApiUsers;
 import com.sabji.repo.GdmsApiUserRepo;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("auth")
+@Tag(name="TESTING-API")
 public class TestController {
 
 	// @Autowired
@@ -27,7 +31,7 @@ public class TestController {
 	@Autowired
 	BCryptPasswordEncoder encoder;
 
-	@RequestMapping("/register")
+	@PostMapping("/register")
 	public String registrationCheck() {
 
 		GdmsApiUsers apiUsers = new GdmsApiUsers();
@@ -39,7 +43,7 @@ public class TestController {
 		detailsOfUser.setModule("SMART");
 		detailsOfUser.setReferenceKey("11");
 		detailsOfUser.setUsername("neelans");
-		apiUsers.setDetailsOfUser(detailsOfUser);
+		//	apiUsers.setDetailsOfUser(detailsOfUser);
 
 		detailsOfUser.setGdmsApiUsers(apiUsers);
 
