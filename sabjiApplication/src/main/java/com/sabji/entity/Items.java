@@ -30,6 +30,14 @@ public class Items {
 	private String area;
 	 
 	private String vegname;
+	
+	private String interestedToMandi;
+	
+	private Double visitingExpenditure;
+	
+	private Double brokerCharge;
+	
+	private String transportNameWithTiming; 
 
 	public String getName() {
 		return name;
@@ -63,23 +71,66 @@ public class Items {
 		this.vegname = vegname;
 	}
 
-	@Override
-	public String toString() {
-		return "Items [name=" + name + ", mobileno=" + mobileno + ", area=" + area + ", vegname=" + vegname + "]";
+	
+	
+	public String getInterestedToMandi() {
+		return interestedToMandi;
 	}
 
-	public Items(String name, String mobileno, String area, String vegname) {
+	public void setInterestedToMandi(String interestedToMandi) {
+		this.interestedToMandi = interestedToMandi;
+	}
+
+	public Double getVisitingExpenditure() {
+		return visitingExpenditure;
+	}
+
+	public void setVisitingExpenditure(Double visitingExpenditure) {
+		this.visitingExpenditure = visitingExpenditure;
+	}
+
+	public Double getBrokerCharge() {
+		return brokerCharge;
+	}
+
+	public void setBrokerCharge(Double brokerCharge) {
+		this.brokerCharge = brokerCharge;
+	}
+
+	public String getTransportNameWithTiming() {
+		return transportNameWithTiming;
+	}
+
+	public void setTransportNameWithTiming(String transportNameWithTiming) {
+		this.transportNameWithTiming = transportNameWithTiming;
+	}
+
+	@Override
+	public String toString() {
+		return "Items [name=" + name + ", mobileno=" + mobileno + ", area=" + area + ", vegname=" + vegname
+				+ ", interestedToMandi=" + interestedToMandi + ", visitingExpenditure=" + visitingExpenditure
+				+ ", brokerCharge=" + brokerCharge + ", transportNameWithTiming=" + transportNameWithTiming + "]";
+	}
+
+	public Items(@NotNull String name, String mobileno, String area, String vegname, String interestedToMandi,
+			Double visitingExpenditure, Double brokerCharge, String transportNameWithTiming) {
 		super();
 		this.name = name;
 		this.mobileno = mobileno;
 		this.area = area;
 		this.vegname = vegname;
+		this.interestedToMandi = interestedToMandi;
+		this.visitingExpenditure = visitingExpenditure;
+		this.brokerCharge = brokerCharge;
+		this.transportNameWithTiming = transportNameWithTiming;
 	}
 
 	public Items() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	 
 
 	  
 
