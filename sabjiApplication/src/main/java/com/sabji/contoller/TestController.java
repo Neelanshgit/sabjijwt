@@ -39,10 +39,11 @@ public class TestController {
 
 		apiUsers.setUsername("neelansh");
 		apiUsers.setPassword(encoder.encode("password"));
-		apiUsers.setDomain("testing");
+//		apiUsers.setDomain("testing");
 		detailsOfUser.setModule("SMART");
 		detailsOfUser.setReferenceKey("11");
 		detailsOfUser.setUsername("neelans");
+	
 		//	apiUsers.setDetailsOfUser(detailsOfUser);
 
 		detailsOfUser.setGdmsApiUsers(apiUsers);

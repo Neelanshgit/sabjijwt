@@ -2,6 +2,7 @@ package com.sabji.contoller;
 
 import java.io.IOException;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,16 +52,23 @@ public class PostController {
 	 
 	@PostMapping("/upload")
     public VegetableEntity uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("vegName") String vegName,
-    		@RequestParam("time") String time) throws IOException 
+    		@RequestParam("time") String time, @RequestParam("requirementOfStorage") 
+    		String requirementOfStorage, @RequestParam("vegetableDurability") String vegetableDurability
+    		
+    		) throws IOException 
 	{
         
             VegetableEntity image = new VegetableEntity();
              image.setPic(file.getBytes());
              image.setVegetableName(vegName);
              image.setTimeperiod(time);
+             image.setColdStorageRequirement(requirementOfStorage);
+             image.setVegetableValidity(vegetableDurability);
             itms.VegetableService(image);
+             
             return itms.VegetableService(image);
-         
+        
+   
 	}
 	
 	@PostMapping("/driverDetails")
