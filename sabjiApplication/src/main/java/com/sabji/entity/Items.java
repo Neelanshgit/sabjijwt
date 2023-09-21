@@ -1,43 +1,44 @@
 package com.sabji.entity;
 
-import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.lang.NonNull;
 
 @Entity
-@Table(name="basic_details")
+@Table(name = "basic_details")
 public class Items {
-	
+
 	@Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int id;
-	
-	@NonNull
-	@NotNull
-	private String name ;
-	 
-	 
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "mobile_no")
 	private String mobileno;
-	 
+
+	@Column(name = "area")
 	private String area;
-	 
+
+	@Column(name = "Name_of_vegatable")
 	private String vegname;
-	
+
+	@Column(name = "eager_to_mandi")
 	private String interestedToMandi;
-	
+
+	@Column(name = "expense_on_visits")
 	private Double visitingExpenditure;
-	
+
+	@Column(name = "charges_of_broker")
 	private Double brokerCharge;
-	
-	private String transportNameWithTiming; 
+
+	@Column(name = "tranport_name_with_timing")
+	private String transportNameWithTiming;
 
 	public String getName() {
 		return name;
@@ -71,8 +72,6 @@ public class Items {
 		this.vegname = vegname;
 	}
 
-	
-	
 	public String getInterestedToMandi() {
 		return interestedToMandi;
 	}
@@ -129,12 +128,5 @@ public class Items {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	 
-
-	  
-
-	 
-	
 
 }

@@ -1,5 +1,7 @@
 package com.sabji.services;
 
+import java.time.LocalDate;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +28,10 @@ public class RegistrationService {
 	public String registerByMobileApplication(RegisterModal usrMstrDto) {
 
 		try {
-			GdmsApiUsers gdmsApiUsers =	mapper.map(usrMstrDto, GdmsApiUsers.class);
+			GdmsApiUsers gdmsApiUsers = mapper.map(usrMstrDto, GdmsApiUsers.class);
 			gdmsApiUsers.setPassword(bcryptEncoder.encode(gdmsApiUsers.getPassword()));
+			gdmsApiUsers.setUserstatus("Y");
+			gdmsApiUsers.setDateOfCreation(LocalDate.now());
 			gdmsApiUserRepo.save(gdmsApiUsers);
 			return "Success";
 		} catch (Exception e) {
