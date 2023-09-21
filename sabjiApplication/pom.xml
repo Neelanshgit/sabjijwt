@@ -58,16 +58,16 @@
 			<artifactId>modelmapper</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-			<!--<dependency>
+			<dependency>
 					<groupId>org.postgresql</groupId>
 					<artifactId>postgresql</artifactId>
 					<scope>runtime</scope>
-				</dependency>-->
-	<dependency>
+				</dependency>
+	<!-- <dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
-		</dependency>	
+		</dependency> -->	
 		<dependency>
 			<groupId>org.apache.httpcomponents.client5</groupId>
 			<artifactId>httpclient5</artifactId>
@@ -85,7 +85,7 @@
 </dependency>
 	</dependencies>
      <build>
-		<finalName>OnlineApp</finalName>
+		<finalName>sabji</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

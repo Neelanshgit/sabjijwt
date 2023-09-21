@@ -11,14 +11,12 @@ public class RegisterModal {
 	private String flgOfUser;
 
 	private String confirmPassword;
-	@JsonIgnoreProperties
-	private java.sql.Date dateOfCreation;
+	
 
 	private String mobileno;
 
 	private String email;
-	@JsonIgnoreProperties
-	private String userstatus;
+	
 
 	public String getUsername() {
 		return username;
@@ -44,13 +42,7 @@ public class RegisterModal {
 		this.flgOfUser = flgOfUser;
 	}
 
-	public java.sql.Date getDateOfCreation() {
-		return dateOfCreation;
-	}
-
-	public void setDateOfCreation(java.sql.Date dateOfCreation) {
-		this.dateOfCreation = dateOfCreation;
-	}
+	
 
 	public String getMobileno() {
 		return mobileno;
@@ -68,13 +60,7 @@ public class RegisterModal {
 		this.email = email;
 	}
 
-	public String getUserstatus() {
-		return userstatus;
-	}
-
-	public void setUserstatus(String userstatus) {
-		this.userstatus = userstatus;
-	}
+	
 
 	public String getConfirmPassword() {
 		return confirmPassword;
