@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sabji.entity.FarmerInfoEntity;
 import com.sabji.entity.Items;
 import com.sabji.entity.VegetableEntity;
+import com.sabji.model.BasicDetailsDTO;
 import com.sabji.model.ResponseWithList;
 import com.sabji.model.ResponseWithObject;
 import com.sabji.services.ItemService;
@@ -41,13 +42,12 @@ public class PostController {
 	
 
 	@PostMapping("/addItems")
-	public ResponseEntity<?> addItems(@Valid @ModelAttribute Items itemname)
+//	public ResponseEntity<?> addItems(@Valid @ModelAttribute Items itemname)
+	
+	public ResponseEntity<?> addItems(@Valid @ModelAttribute BasicDetailsDTO basicdetaildto)
 	{
 	 
-		itemname =	itms.itemservice(itemname);
- 		  
-		 return  new ResponseWithObject().generateResponse("", HttpStatus.OK, "", itemname);
-		 
+ 		return  new ResponseWithObject().generateResponse("", HttpStatus.OK, "", basicdetaildto);
 	}
 	 
 	@PostMapping("/upload")

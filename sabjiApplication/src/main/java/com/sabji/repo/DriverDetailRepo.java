@@ -2,8 +2,9 @@ package com.sabji.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.sabji.entity.FarmerInfoEntity;
+import com.sabji.entity.DriverDetails;
+ 
 
-public interface DriverDetailRepo extends JpaRepository<FarmerInfoEntity, Integer>{
+public interface DriverDetailRepo extends JpaRepository<DriverDetails, Integer>{
 
 }

@@ -1,39 +1,42 @@
 package com.sabji.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.springframework.lang.NonNull;
-
+ 
+ 
 @Entity
 @Table(name="delvery_partners")
 public class FarmerInfoEntity {
 	
 	@Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int id;
-	
-	@NonNull
-	@NotNull
+	 
+	@Column(name="name_of_driver")
 	private String driverName;
 	
-	
+	@Column(name="name_of_transport")
 	private String transportname;
-	
+	@Column(name="age")
 	private int age;
 	
+	@Column(name="sum_of_amount")
 	private Double amountsum;
 	
+	@Column(name="area_of_working")
 	private String workingarea;
 	
+	@Column(name="quantity")
 	private String quantity;
-
+	
+	@Column(name="mode_of_connection")
 	private String modeofConnection;
 	
+	@Column(name="working_of_hours")
 	private String workingHour;
 	
 	public String getDriverName() {
