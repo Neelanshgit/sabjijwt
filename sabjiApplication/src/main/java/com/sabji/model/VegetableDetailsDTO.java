@@ -1,48 +1,39 @@
-package com.sabji.entity;
+package com.sabji.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.web.multipart.MultipartFile;
 
-@Entity
-@Table(name = "vegetable_details")
-public class VegetableEntity {
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "veg_id")
-	public int vegId;
+@JsonSerialize
+public class VegetableDetailsDTO {
 
-	@Column(name = "vegetable_name")
+	// public int vegId;
+
 	private String vegetableName;
 
-	@Column(name = "vegetable_pic")
-	private byte[] pic;
+	private MultipartFile Image;
 
-	@Column(name = "season_of_vegetable")
+	private byte[] pic;
 	private String timeperiod;
 
-	@Column(name = "vegetable_validity")
 	private String vegetableValidity;
 
-	@Column(name = "cold_storage_required")
 	private String coldStorageRequirement;
 
-	@Column(name = "area_Cme_frm")
 	private String kahaSetAtiHai;
 
-	@Column(name = "availability")
 	private String availability;
 
-	public int getVegId() {
-		return vegId;
+	public MultipartFile getImage() {
+		return Image;
 	}
 
-	public void setVegId(int vegId) {
-		this.vegId = vegId;
+	public void setImage(MultipartFile image) {
+		Image = image;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
 	}
 
 	public String getVegetableName() {
@@ -53,13 +44,11 @@ public class VegetableEntity {
 		this.vegetableName = vegetableName;
 	}
 
-	public byte[] getPic() {
-		return pic;
-	}
-
-	public void setPic(byte[] pic) {
-		this.pic = pic;
-	}
+	/*
+	 * public int getVegId() { return vegId; }
+	 *
+	 * public void setVegId(int vegId) { this.vegId = vegId; }
+	 */
 
 	public String getTimeperiod() {
 		return timeperiod;

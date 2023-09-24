@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.firewall.RequestRejectedException;
 import org.springframework.validation.FieldError;
@@ -25,12 +26,8 @@ import com.sabji.model.Response2;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
-
-
 @ControllerAdvice
-public class ExceptionController{
-
-
+public class ExceptionController {
 
 	@ExceptionHandler(value = IOException.class)
 
@@ -100,7 +97,7 @@ public class ExceptionController{
 			hash.put(feildname, message);
 		});
 
-		return new ResponseEntity<HashMap<String, String>>(hash, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(hash, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -127,6 +124,12 @@ public class ExceptionController{
 
 	}
 
+	@ExceptionHandler(value = { DisabledException.class })
+	public ResponseEntity<?> handeleDisabledException(HttpServletRequest request, Throwable ex) {
+
+		return Response2.generateResponse("User in locked ", HttpStatus.NETWORK_AUTHENTICATION_REQUIRED, "004");
+	}
+
 	@ExceptionHandler(value = { ServletException.class })
 	public ResponseEntity<?> servletException(HttpServletRequest request, Throwable ex) {
 		String message = ex.getMessage();
@@ -135,4 +138,5 @@ public class ExceptionController{
 		}
 		return Response2.generateResponse(message, HttpStatus.NETWORK_AUTHENTICATION_REQUIRED, "999");
 	}
+
 }

@@ -10,52 +10,72 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sabji.entity.DriverDetails;
+import com.sabji.entity.FarmerInfo;
 import com.sabji.entity.FarmerInfoEntity;
-import com.sabji.entity.Items;
 import com.sabji.entity.VegetableEntity;
+import com.sabji.model.BasicDetailsDTO;
 import com.sabji.model.ResponseWithList;
+import com.sabji.services.FarmerService;
 import com.sabji.services.ItemService;
+import com.sabji.services.VehcileService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-
- 
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("api")
-@Tag(name="For-Getting-Data")
+@Tag(name = "For fetching the Data")
 public class GetController {
-	
+
 	@Autowired
 	ItemService itemService;
-	
+
+	@Autowired
+	FarmerService farmerService;
+
+	@Autowired
+	VehcileService vehcileService;
+
 	@GetMapping("/findItems")
-	public ResponseEntity<?> findAllItems(){
-		
-		List<Items> items =	itemService.getallItems();
-		
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", items) ;
-		
+	public ResponseEntity<Object> findAllItems() {
+
+		List<BasicDetailsDTO> items = itemService.getallItems();
+
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", items);
+
 	}
-	
+
 	@GetMapping("/findVegatable")
-	public ResponseEntity<?> findVegatableDetail(){
-		
-		List<VegetableEntity> vegetableEntities	 = itemService.getallVegetableDetail();
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", vegetableEntities) ;
-		
-		
-		
+	public ResponseEntity<?> findVegatableDetail() {
+
+		List<VegetableEntity> vegetableEntities = itemService.getallVegetableDetail();
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", vegetableEntities);
+
 	}
 
-	
+	@GetMapping("/findDeliveryPartner")
+	public ResponseEntity<?> findDeliveryPartner() {
+
+		List<FarmerInfoEntity> farmerInfoEntities = itemService.getallFarmardetail();
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", farmerInfoEntities);
+
+	}
+
 	@GetMapping("/findFarmer")
-	public ResponseEntity<?> findFarmerDetail(){
-		
-		List<FarmerInfoEntity>  farmerInfoEntities =  itemService.getallFarmardetail();
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", farmerInfoEntities) ;
-		
+	public ResponseEntity<?> findfarmer() {
+
+		List<FarmerInfo> farmerinformation = itemService.getallFarmerinfo();
+
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", farmerinformation);
 	}
 
+	@GetMapping("/findDriverDetails")
+	public ResponseEntity<?> findDriver() {
+
+		List<DriverDetails> driverdetails = itemService.getdriverdetailsinfo();
+
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", driverdetails);
+	}
 
 }

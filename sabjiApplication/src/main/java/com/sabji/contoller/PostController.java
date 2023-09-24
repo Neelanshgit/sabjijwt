@@ -2,82 +2,124 @@ package com.sabji.contoller;
 
 import java.io.IOException;
 
-import javax.persistence.Column;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sabji.entity.DriverDetails;
 import com.sabji.entity.FarmerInfoEntity;
-import com.sabji.entity.Items;
 import com.sabji.entity.VegetableEntity;
-import com.sabji.model.ResponseWithList;
+import com.sabji.model.DriverDetailDTO;
+import com.sabji.model.FarmerInfoDTO;
 import com.sabji.model.ResponseWithObject;
+import com.sabji.model.VegetableDetailsDTO;
+import com.sabji.services.FarmerService;
 import com.sabji.services.ItemService;
+import com.sabji.services.VehcileService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
- 
-
- 
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("api")
-@Tag(name="For-Post-Data")
+@Tag(name = "For Saving Details from App")
 public class PostController {
-	
+
 	@Autowired
 	ItemService itms;
-	
 
-	@PostMapping("/addItems")
-	public ResponseEntity<?> addItems(@Valid @ModelAttribute Items itemname)
-	{
-	 
-		itemname =	itms.itemservice(itemname);
- 		  
-		 return  new ResponseWithObject().generateResponse("", HttpStatus.OK, "", itemname);
-		 
+	@Autowired
+	FarmerService farmerService;
+
+	@Autowired
+	VehcileService vehcileService;
+
+	final String successStatus = "Success";
+
+	@PostMapping(value = "/addVegitableDetails", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Operation(summary = "सब्जी से सम्बंधित जानकारी ")
+	public ResponseEntity<Object> uploadImage(@Valid VegetableDetailsDTO vegetableDetailsDTO) {
+
+		String responseOfSave = itms.saveVegetableService(vegetableDetailsDTO);
+		if (successStatus.equals(responseOfSave)) {
+			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "",
+					vegetableDetailsDTO);
+		} else {
+			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
+					"", vegetableDetailsDTO);
+		}
 	}
-	 
-	@PostMapping("/upload")
-    public VegetableEntity uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("vegName") String vegName,
-    		@RequestParam("time") String time, @RequestParam("requirementOfStorage") 
-    		String requirementOfStorage, @RequestParam("vegetableDurability") String vegetableDurability
-    		
-    		) throws IOException 
-	{
-        
-            VegetableEntity image = new VegetableEntity();
-             image.setPic(file.getBytes());
-             image.setVegetableName(vegName);
-             image.setTimeperiod(time);
-             image.setColdStorageRequirement(requirementOfStorage);
-             image.setVegetableValidity(vegetableDurability);
-            itms.VegetableService(image);
-             
-            return itms.VegetableService(image);
-        
-   
+
+	@PostMapping("/addKisanData")
+	@Operation(summary = "किसान से सम्बंधित जानकारी ")
+	public ResponseEntity<Object> addItems(@Valid @ModelAttribute FarmerInfoDTO farmerInfoDTO) {
+
+		String responseOfSave = farmerService.saveFarmerData(farmerInfoDTO);
+		if (successStatus.equals(responseOfSave)) {
+			return new ResponseWithObject().generateResponse("Farmer saved successfully", HttpStatus.OK, "",
+					farmerInfoDTO);
+		} else {
+			return new ResponseWithObject().generateResponse("not saved", HttpStatus.OK, "", farmerInfoDTO);
+		}
+
 	}
-	
-	@PostMapping("/driverDetails")
-	public ResponseEntity<?> uploadImage(@ModelAttribute FarmerInfoEntity farmarentity) {
-		
-//		return itms.farmerService(farmarentity);
-		
-		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", farmarentity) ;
-	
+
+	@PostMapping("/addDriverDetails")
+	@Operation(summary = " वाहन  चालक और उससे सम्बंधित ")
+	public ResponseEntity<Object> driverdetail(@Valid @ModelAttribute DriverDetailDTO driverDetailDTO) {
+
+		String responseOfSave = vehcileService.saveDriverData(driverDetailDTO);
+		if (successStatus.equals(responseOfSave)) {
+			return new ResponseWithObject().generateResponse("driver saved successfully", HttpStatus.OK, "",
+					driverDetailDTO);
+		} else {
+			return new ResponseWithObject().generateResponse("not saved", HttpStatus.OK, "", driverDetailDTO);
+		}
+
 	}
-}	 
- 
+
+	/* neeche ki sari api theek karo narendra */
+
+	@PostMapping("/deliveryPartnerDetails")
+	@Operation(summary = "हमसे जुड़ने के लिए तैयरा ")
+	public ResponseEntity<Object> uploadImage(@Valid @ModelAttribute FarmerInfoEntity farmarentity) {
+
+		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", farmarentity);
+
+	}
+
+	@PostMapping("/addDriverDetailsBrief")
+	@Operation(summary = " वाहन  चालक और उससे सम्बंधित ")
+	public ResponseEntity<Object> driverdetail(@Valid @ModelAttribute DriverDetails driverdetails) {
+		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", driverdetails);
+
+	}
+
+	@PostMapping(value = "/addVegetable", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Operation(summary = "add vegatble")
+	public VegetableEntity uploadImage(@Valid @RequestParam("file") MultipartFile file,
+			@RequestParam("vegName") String vegName, @RequestParam("time") String time,
+			@RequestParam("requirementOfStorage") String requirementOfStorage,
+			@RequestParam("vegetableDurability") String vegetableDurability) throws IOException {
+		VegetableEntity image = new VegetableEntity();
+		image.setPic(file.getBytes());
+		image.setVegetableName(vegName);
+		image.setTimeperiod(time);
+		image.setColdStorageRequirement(requirementOfStorage);
+		image.setVegetableValidity(vegetableDurability);
+		itms.VegetableService(image);
+		return itms.VegetableService(image);
+	}
+
+}
