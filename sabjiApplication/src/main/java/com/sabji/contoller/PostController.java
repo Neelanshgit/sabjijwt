@@ -56,8 +56,8 @@ public class PostController {
 			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "",
 					vegetableDetailsDTO);
 		} else {
-			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.OK, "",
-					vegetableDetailsDTO);
+			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
+					"", vegetableDetailsDTO);
 		}
 	}
 

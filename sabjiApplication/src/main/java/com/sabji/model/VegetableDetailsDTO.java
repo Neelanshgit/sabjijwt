@@ -1,11 +1,19 @@
 package com.sabji.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
 public class VegetableDetailsDTO {
+
+	// public int vegId;
 
 	private String vegetableName;
 
-	private byte[] pic;
+	private MultipartFile Image;
 
+	private byte[] pic;
 	private String timeperiod;
 
 	private String vegetableValidity;
@@ -16,6 +24,18 @@ public class VegetableDetailsDTO {
 
 	private String availability;
 
+	public MultipartFile getImage() {
+		return Image;
+	}
+
+	public void setImage(MultipartFile image) {
+		Image = image;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
+
 	public String getVegetableName() {
 		return vegetableName;
 	}
@@ -24,13 +44,11 @@ public class VegetableDetailsDTO {
 		this.vegetableName = vegetableName;
 	}
 
-	public byte[] getPic() {
-		return pic;
-	}
-
-	public void setPic(byte[] pic) {
-		this.pic = pic;
-	}
+	/*
+	 * public int getVegId() { return vegId; }
+	 *
+	 * public void setVegId(int vegId) { this.vegId = vegId; }
+	 */
 
 	public String getTimeperiod() {
 		return timeperiod;

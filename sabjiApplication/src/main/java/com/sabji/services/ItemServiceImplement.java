@@ -2,6 +2,7 @@ package com.sabji.services;
 
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -159,7 +160,9 @@ public class ItemServiceImplement implements ItemService {
 	public String saveVegetableService(VegetableDetailsDTO vegetableDetailsDTO) {
 
 		try {
+			vegetableDetailsDTO.setPic(Base64.encodeBase64(vegetableDetailsDTO.getImage().getBytes()));
 			VegetableEntity vegetableEntity = mapper.map(vegetableDetailsDTO, VegetableEntity.class);
+
 			vegetablerepo.save(vegetableEntity);
 			return "Success";
 
