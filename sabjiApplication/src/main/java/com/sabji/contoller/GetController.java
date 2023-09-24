@@ -16,18 +16,26 @@ import com.sabji.entity.FarmerInfoEntity;
 import com.sabji.entity.VegetableEntity;
 import com.sabji.model.BasicDetailsDTO;
 import com.sabji.model.ResponseWithList;
+import com.sabji.services.FarmerService;
 import com.sabji.services.ItemService;
+import com.sabji.services.VehcileService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("api")
-@Tag(name = "For-Getting-Data")
+@Tag(name = "For fetching the Data")
 public class GetController {
 
 	@Autowired
 	ItemService itemService;
+
+	@Autowired
+	FarmerService farmerService;
+
+	@Autowired
+	VehcileService vehcileService;
 
 	@GetMapping("/findItems")
 	public ResponseEntity<Object> findAllItems() {
@@ -46,13 +54,6 @@ public class GetController {
 
 	}
 
-//	@GetMapping("/findFarmer")
-//	public ResponseEntity<?> findFarmerDetail(){
-//
-//		List<FarmerInfoEntity>  farmerInfoEntities =  itemService.getallFarmardetail();
-//		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", farmerInfoEntities) ;
-//
-//	}
 	@GetMapping("/findDeliveryPartner")
 	public ResponseEntity<?> findDeliveryPartner() {
 
