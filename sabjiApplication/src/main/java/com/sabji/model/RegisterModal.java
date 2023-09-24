@@ -1,30 +1,14 @@
 package com.sabji.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 public class RegisterModal {
-
-	private String username;
-
-	private String password;
-
-	private String flgOfUser;
-
-	private String confirmPassword;
-	
 
 	private String mobileno;
 
 	private String email;
-	
 
-	public String getUsername() {
-		return username;
-	}
+	private String password;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	private String flgOfUser;
 
 	public String getPassword() {
 		return password;
@@ -42,8 +26,6 @@ public class RegisterModal {
 		this.flgOfUser = flgOfUser;
 	}
 
-	
-
 	public String getMobileno() {
 		return mobileno;
 	}
@@ -58,16 +40,6 @@ public class RegisterModal {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
 	}
 
 }

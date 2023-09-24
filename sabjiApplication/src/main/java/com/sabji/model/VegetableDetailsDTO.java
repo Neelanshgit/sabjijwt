@@ -1,27 +1,20 @@
 package com.sabji.model;
- 
 
 public class VegetableDetailsDTO {
-	
-	public int id;
-	 
+
 	private String vegetableName;
 
 	private byte[] pic;
 
 	private String timeperiod;
-	 
+
 	private String vegetableValidity;
 
 	private String coldStorageRequirement;
 
-	public int getId() {
-		return id;
-	}
+	private String kahaSetAtiHai;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	private String availability;
 
 	public String getVegetableName() {
 		return vegetableName;
@@ -63,6 +56,20 @@ public class VegetableDetailsDTO {
 		this.coldStorageRequirement = coldStorageRequirement;
 	}
 
-	
-	
+	public String getKahaSetAtiHai() {
+		return kahaSetAtiHai;
+	}
+
+	public void setKahaSetAtiHai(String kahaSetAtiHai) {
+		this.kahaSetAtiHai = kahaSetAtiHai;
+	}
+
+	public String getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(String availability) {
+		this.availability = availability;
+	}
+
 }

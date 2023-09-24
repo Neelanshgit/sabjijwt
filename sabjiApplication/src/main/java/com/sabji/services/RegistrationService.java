@@ -1,6 +1,9 @@
 package com.sabji.services;
 
 import java.time.LocalDate;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +34,30 @@ public class RegistrationService {
 			GdmsApiUsers gdmsApiUsers = mapper.map(usrMstrDto, GdmsApiUsers.class);
 			gdmsApiUsers.setPassword(bcryptEncoder.encode(gdmsApiUsers.getPassword()));
 			gdmsApiUsers.setUserstatus("Y");
+			gdmsApiUsers.setUsername(gdmsApiUsers.getMobileNo());
 			gdmsApiUsers.setDateOfCreation(LocalDate.now());
 			gdmsApiUserRepo.save(gdmsApiUsers);
 			return "Success";
 		} catch (Exception e) {
 			log.error("there is an exception in  registring the user {} ", e.getMessage());
 			return "Error";
+		}
+
+	}
+
+	public String findByMobile(@Valid RegisterModal userMstr) {
+
+		try {
+			Optional<GdmsApiUsers> mobileCheck = gdmsApiUserRepo.findByMobileNo(userMstr.getMobileno());
+			if (mobileCheck.isPresent()) {
+				return "A";
+			} else {
+				return "NA";
+			}
+
+		} catch (Exception e) {
+			log.error("there is an exception in  registring the user {} ", e.getMessage());
+			return "A";
 		}
 
 	}

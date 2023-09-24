@@ -1,4 +1,5 @@
 package com.sabji.contoller;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +20,30 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("auth")
-@Tag(name="Registration-API")
+@Tag(name = "Registration-API")
 public class RegistrationController {
-
 
 	@Autowired
 	RegistrationService registrationService;
 
+	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RegistrationController.class);
+
 	@PostMapping(value = "/registerToApp")
 	public ResponseEntity<?> registration(@Valid @RequestBody RegisterModal userMstr) {
-		System.out.println("testing of the register with model api ");
-		if (!userMstr.getPassword().equals(userMstr.getConfirmPassword())) {
-			return Response2.generateResponse("Password Should match confirm password ", HttpStatus.BAD_REQUEST, "400");
+
+		String mobileStatus = registrationService.findByMobile(userMstr);
+		if ("A".equals(mobileStatus)) {
+			return Response2.generateResponse("Mobile Number already available", HttpStatus.OK, "201");
 		} else {
 			String regResponse = registrationService.registerByMobileApplication(userMstr);
+			log.info("Registration status of the user {} ", regResponse);
 			if (regResponse.equalsIgnoreCase("existing")) {
 				return Response2.generateResponse("User already exist ", HttpStatus.FOUND, "302");
+			} else if (regResponse.equalsIgnoreCase("Error")) {
+				return Response2.generateResponse("Something wnet wrong", HttpStatus.OK, "200");
 			} else {
 				return Response2.generateResponse("Successfully register", HttpStatus.OK, "200");
 			}
-
 		}
 
 	}

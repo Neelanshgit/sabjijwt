@@ -1,45 +1,53 @@
 package com.sabji.model;
 
-import javax.persistence.Column;
-
 public class FarmerInfoDTO {
-	
-	private int Id;
-	 
-	private String phoneNumber;
-	 
-	  private String area;
-	   	 
-	 private String vegetableQuantity;
-	 
-	 private String transportName;
-	 
-	 private String distanceFromMandi;
-	 
-	 private int farmerVisitingCount;
-	 
-	 private String sellingArea;
-	  
-	private String nameOfMandi;
-	   
-	 private String varietyOfVegetables;
-	 
-	 private String amountOfCommision;
-	 
-	 private String quest1;
-	  
-	 private String quest2;
-	 
-	 private String quest3;
-	   
-	 private String quest4;
 
-	public int getId() {
-		return Id;
+	private int farmerId;
+	private String farmerName;
+	private String phoneNumber;
+
+	private String area;
+
+	private String vegCurntCarrying;
+
+	private String vegetableQuantity;
+
+	private String distanceFromMandi;
+
+	private String transportName;
+
+	private int farmerVisitingCount;
+
+	private String sellingArea;
+
+	private String nameOfMandi;
+
+	private String varietyOfVegetables;
+
+	private String amountOfCommision;
+
+	private String quest1;
+
+	private String quest2;
+
+	private String quest3;
+
+	private String quest4;
+
+	public String getFarmerName() {
+		return farmerName;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setFarmerName(String farmerName) {
+		this.farmerName = farmerName;
+	}
+
+	public int getFarmerId() {
+		return farmerId;
+	}
+
+	public void setFarmerId(int farmerId) {
+		this.farmerId = farmerId;
 	}
 
 	public String getPhoneNumber() {
@@ -58,6 +66,14 @@ public class FarmerInfoDTO {
 		this.area = area;
 	}
 
+	public String getVegCurntCarrying() {
+		return vegCurntCarrying;
+	}
+
+	public void setVegCurntCarrying(String vegCurntCarrying) {
+		this.vegCurntCarrying = vegCurntCarrying;
+	}
+
 	public String getVegetableQuantity() {
 		return vegetableQuantity;
 	}
@@ -66,20 +82,20 @@ public class FarmerInfoDTO {
 		this.vegetableQuantity = vegetableQuantity;
 	}
 
-	public String getTransportName() {
-		return transportName;
-	}
-
-	public void setTransportName(String transportName) {
-		this.transportName = transportName;
-	}
-
 	public String getDistanceFromMandi() {
 		return distanceFromMandi;
 	}
 
 	public void setDistanceFromMandi(String distanceFromMandi) {
 		this.distanceFromMandi = distanceFromMandi;
+	}
+
+	public String getTransportName() {
+		return transportName;
+	}
+
+	public void setTransportName(String transportName) {
+		this.transportName = transportName;
 	}
 
 	public int getFarmerVisitingCount() {
@@ -153,6 +169,5 @@ public class FarmerInfoDTO {
 	public void setQuest4(String quest4) {
 		this.quest4 = quest4;
 	}
-
 
 }

@@ -1,47 +1,43 @@
 package com.sabji.model;
 
- 
 public class BasicDetailsDTO {
- 	public int id;
-  
-	private String name;
 
-	private String mobileno;
+	private String phoneNumber;
 
 	private String area;
 
-	private String vegname;
+	private String vegCurntCarrying;
 
-	private String interestedToMandi;
+	private String vegetableQuantity;
 
-	private Double visitingExpenditure;
-	 
-	private Double brokerCharge;
-	 
-	private String transportNameWithTiming;
+	private String distanceFromMandi;
 
-	public int getId() {
-		return id;
+	private String transportName;
+
+	private int farmerVisitingCount;
+
+	private String sellingArea;
+
+	private String nameOfMandi;
+
+	private String varietyOfVegetables;
+
+	private String amountOfCommision;
+
+	private String quest1;
+
+	private String quest2;
+
+	private String quest3;
+
+	private String quest4;
+
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getMobileno() {
-		return mobileno;
-	}
-
-	public void setMobileno(String mobileno) {
-		this.mobileno = mobileno;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getArea() {
@@ -52,46 +48,108 @@ public class BasicDetailsDTO {
 		this.area = area;
 	}
 
-	public String getVegname() {
-		return vegname;
+	public String getVegCurntCarrying() {
+		return vegCurntCarrying;
 	}
 
-	public void setVegname(String vegname) {
-		this.vegname = vegname;
+	public void setVegCurntCarrying(String vegCurntCarrying) {
+		this.vegCurntCarrying = vegCurntCarrying;
 	}
 
-	public String getInterestedToMandi() {
-		return interestedToMandi;
+	public String getVegetableQuantity() {
+		return vegetableQuantity;
 	}
 
-	public void setInterestedToMandi(String interestedToMandi) {
-		this.interestedToMandi = interestedToMandi;
+	public void setVegetableQuantity(String vegetableQuantity) {
+		this.vegetableQuantity = vegetableQuantity;
 	}
 
-	public Double getVisitingExpenditure() {
-		return visitingExpenditure;
+	public String getDistanceFromMandi() {
+		return distanceFromMandi;
 	}
 
-	public void setVisitingExpenditure(Double visitingExpenditure) {
-		this.visitingExpenditure = visitingExpenditure;
+	public void setDistanceFromMandi(String distanceFromMandi) {
+		this.distanceFromMandi = distanceFromMandi;
 	}
 
-	public Double getBrokerCharge() {
-		return brokerCharge;
+	public String getTransportName() {
+		return transportName;
 	}
 
-	public void setBrokerCharge(Double brokerCharge) {
-		this.brokerCharge = brokerCharge;
+	public void setTransportName(String transportName) {
+		this.transportName = transportName;
 	}
 
-	public String getTransportNameWithTiming() {
-		return transportNameWithTiming;
+	public int getFarmerVisitingCount() {
+		return farmerVisitingCount;
 	}
 
-	public void setTransportNameWithTiming(String transportNameWithTiming) {
-		this.transportNameWithTiming = transportNameWithTiming;
+	public void setFarmerVisitingCount(int farmerVisitingCount) {
+		this.farmerVisitingCount = farmerVisitingCount;
 	}
-	
-	
+
+	public String getSellingArea() {
+		return sellingArea;
+	}
+
+	public void setSellingArea(String sellingArea) {
+		this.sellingArea = sellingArea;
+	}
+
+	public String getNameOfMandi() {
+		return nameOfMandi;
+	}
+
+	public void setNameOfMandi(String nameOfMandi) {
+		this.nameOfMandi = nameOfMandi;
+	}
+
+	public String getVarietyOfVegetables() {
+		return varietyOfVegetables;
+	}
+
+	public void setVarietyOfVegetables(String varietyOfVegetables) {
+		this.varietyOfVegetables = varietyOfVegetables;
+	}
+
+	public String getAmountOfCommision() {
+		return amountOfCommision;
+	}
+
+	public void setAmountOfCommision(String amountOfCommision) {
+		this.amountOfCommision = amountOfCommision;
+	}
+
+	public String getQuest1() {
+		return quest1;
+	}
+
+	public void setQuest1(String quest1) {
+		this.quest1 = quest1;
+	}
+
+	public String getQuest2() {
+		return quest2;
+	}
+
+	public void setQuest2(String quest2) {
+		this.quest2 = quest2;
+	}
+
+	public String getQuest3() {
+		return quest3;
+	}
+
+	public void setQuest3(String quest3) {
+		this.quest3 = quest3;
+	}
+
+	public String getQuest4() {
+		return quest4;
+	}
+
+	public void setQuest4(String quest4) {
+		this.quest4 = quest4;
+	}
 
 }

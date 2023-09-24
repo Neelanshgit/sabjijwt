@@ -1,7 +1,5 @@
 package com.sabji.entity;
 
-import java.util.Arrays;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +13,8 @@ public class VegetableEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public int id;
+	@Column(name = "veg_id")
+	public int vegId;
 
 	@Column(name = "vegetable_name")
 	private String vegetableName;
@@ -31,6 +30,20 @@ public class VegetableEntity {
 
 	@Column(name = "cold_storage_required")
 	private String coldStorageRequirement;
+
+	@Column(name = "area_Cme_frm")
+	private String kahaSetAtiHai;
+
+	@Column(name = "availability")
+	private String availability;
+
+	public int getVegId() {
+		return vegId;
+	}
+
+	public void setVegId(int vegId) {
+		this.vegId = vegId;
+	}
 
 	public String getVegetableName() {
 		return vegetableName;
@@ -72,26 +85,20 @@ public class VegetableEntity {
 		this.coldStorageRequirement = coldStorageRequirement;
 	}
 
-	@Override
-	public String toString() {
-		return "VegetableEntity [vegetableName=" + vegetableName + ", pic=" + Arrays.toString(pic) + ", timeperiod="
-				+ timeperiod + ", vegetableValidity=" + vegetableValidity + ", coldStorageRequirement="
-				+ coldStorageRequirement + "]";
+	public String getKahaSetAtiHai() {
+		return kahaSetAtiHai;
 	}
 
-	public VegetableEntity(String vegetableName, byte[] pic, String timeperiod, String vegetableValidity,
-			String coldStorageRequirement) {
-		super();
-		this.vegetableName = vegetableName;
-		this.pic = pic;
-		this.timeperiod = timeperiod;
-		this.vegetableValidity = vegetableValidity;
-		this.coldStorageRequirement = coldStorageRequirement;
+	public void setKahaSetAtiHai(String kahaSetAtiHai) {
+		this.kahaSetAtiHai = kahaSetAtiHai;
 	}
 
-	public VegetableEntity() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(String availability) {
+		this.availability = availability;
 	}
 
 }

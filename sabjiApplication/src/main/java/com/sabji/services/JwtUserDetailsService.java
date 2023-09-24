@@ -1,6 +1,7 @@
 package com.sabji.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,32 +19,30 @@ import com.sabji.repo.UserEntranceRepo;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
-
 	@Autowired
 	UserEntranceRepo entranceRepo;
 
-     @Autowired
+	@Autowired
 	GdmsApiUserRepo apiUserRepo;
-	
-     Logger logger = LoggerFactory.getLogger(JwtUserDetailsService.class);
-     
-	
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+	Logger logger = LoggerFactory.getLogger(JwtUserDetailsService.class);
+
+	@Override
+	public UserDetails loadUserByUsername(String mobile) throws UsernameNotFoundException {
 
 		try {
-			GdmsApiUsers user = apiUserRepo.findByUsername(username);
-            if (user == null) {
-				throw new UsernameNotFoundException("User not found with username: " + username);
-				
+			Optional<GdmsApiUsers> user = apiUserRepo.findByMobileNo(mobile);
+			if (user == null || !user.isPresent()) {
+				throw new UsernameNotFoundException("User not found with username: " + mobile);
+
 			} else {
-				return new User(user.getUsername(), user.getPassword(),
-						new ArrayList<>());
+				return new User(user.get().getUsername(), user.get().getPassword(), new ArrayList<>());
 			}
 
 		} catch (Exception e) {
-			throw new UsernameNotFoundException("User not found with username: " + username);
+			throw new UsernameNotFoundException("User not found with username: " + mobile);
 		}
 
 	}
-	 
+
 }

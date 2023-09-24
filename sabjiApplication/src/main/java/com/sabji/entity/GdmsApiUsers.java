@@ -17,7 +17,6 @@ public class GdmsApiUsers {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
-	@Id
 	@Column(name = "USERNAME")
 	private String username;
 	@Column(name = "PASSWORD")
@@ -27,8 +26,9 @@ public class GdmsApiUsers {
 	private String flgOfUser;
 	@Column(name = "DATE_OF_USERCREATION")
 	private LocalDate dateOfCreation;
+	@Id
 	@Column(name = "mobile_no")
-	private String mobileno;// mobile no
+	private String mobileNo;// mobile no
 	@Column(name = "email")
 	private String email;
 
@@ -83,12 +83,12 @@ public class GdmsApiUsers {
 		this.dateOfCreation = dateOfCreation;
 	}
 
-	public String getMobileno() {
-		return mobileno;
+	public String getMobileNo() {
+		return mobileNo;
 	}
 
-	public void setMobileno(String mobileno) {
-		this.mobileno = mobileno;
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 	public String getEmail() {

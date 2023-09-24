@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sabji.entity.DetailsOfUser;
 import com.sabji.entity.GdmsApiUsers;
 import com.sabji.repo.GdmsApiUserRepo;
 
@@ -19,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("auth")
-@Tag(name="TESTING-API")
+@Tag(name = "TESTING-API")
 public class TestController {
 
 	// @Autowired
@@ -35,19 +34,9 @@ public class TestController {
 	public String registrationCheck() {
 
 		GdmsApiUsers apiUsers = new GdmsApiUsers();
-		DetailsOfUser detailsOfUser = new DetailsOfUser();
-
-		apiUsers.setUsername("neelansh");
+		apiUsers.setUsername("7275431268");
 		apiUsers.setPassword(encoder.encode("password"));
-//		apiUsers.setDomain("testing");
-		detailsOfUser.setModule("SMART");
-		detailsOfUser.setReferenceKey("11");
-		detailsOfUser.setUsername("neelans");
-	
-		//	apiUsers.setDetailsOfUser(detailsOfUser);
-
-		detailsOfUser.setGdmsApiUsers(apiUsers);
-
+		apiUsers.setFlgOfUser("A");
 		GdmsApiUserRepo.save(apiUsers);
 
 		return "success";
