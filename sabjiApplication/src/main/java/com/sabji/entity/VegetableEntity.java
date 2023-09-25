@@ -14,7 +14,7 @@ public class VegetableEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "veg_id")
-	public int vegId;
+	public Long vegId;
 
 	@Column(name = "vegetable_name")
 	private String vegetableName;
@@ -37,11 +37,14 @@ public class VegetableEntity {
 	@Column(name = "availability")
 	private String availability;
 
-	public int getVegId() {
+	@Column(name = "user_code")
+	private String userCode;
+
+	public Long getVegId() {
 		return vegId;
 	}
 
-	public void setVegId(int vegId) {
+	public void setVegId(Long vegId) {
 		this.vegId = vegId;
 	}
 
@@ -99,6 +102,14 @@ public class VegetableEntity {
 
 	public void setAvailability(String availability) {
 		this.availability = availability;
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
 }

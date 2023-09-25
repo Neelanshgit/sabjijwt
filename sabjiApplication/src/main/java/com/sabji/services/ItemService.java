@@ -2,7 +2,10 @@ package com.sabji.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sabji.entity.DriverDetails;
 import com.sabji.entity.FarmerInfo;
@@ -10,7 +13,6 @@ import com.sabji.entity.FarmerInfoEntity;
 import com.sabji.entity.Items;
 import com.sabji.entity.VegetableEntity;
 import com.sabji.model.BasicDetailsDTO;
-import com.sabji.model.VegetableDetailsDTO;
 
 @Service
 public interface ItemService {
@@ -22,8 +24,6 @@ public interface ItemService {
 	public FarmerInfoEntity farmerService(FarmerInfoEntity farmerentity);
 
 	public VegetableEntity VegetableService(VegetableEntity vegetableEntity);
-
-	public String saveVegetableService(VegetableDetailsDTO vegetableDetailsDTO);
 
 	public FarmerInfo farmerinfo(FarmerInfo farmerinformation);
 
@@ -50,4 +50,6 @@ public interface ItemService {
 	public List<FarmerInfo> getFarmerinfoById();
 
 	public List<DriverDetails> getdrivDetailsById();
+
+	public String saveVegeatableImage(@Valid MultipartFile pic, String userCode, String vegId);
 }

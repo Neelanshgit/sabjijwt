@@ -14,7 +14,7 @@ public class DriverDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "driver_id")
-	private int id;
+	private Long id;
 
 	@Column(name = "driver_name")
 	private String driverName;
@@ -36,6 +36,25 @@ public class DriverDetails {
 
 	@Column(name = "driver_ph_no")
 	private String driverNumber;
+
+	@Column(name = "user_code")
+	private String userCode;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
 
 	public String getDriverName() {
 		return driverName;

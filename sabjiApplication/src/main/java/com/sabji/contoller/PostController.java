@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ import com.sabji.model.ResponseWithObject;
 import com.sabji.model.VegetableDetailsDTO;
 import com.sabji.services.FarmerService;
 import com.sabji.services.ItemService;
+import com.sabji.services.VegetableServices;
 import com.sabji.services.VehcileService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,19 +47,50 @@ public class PostController {
 	@Autowired
 	VehcileService vehcileService;
 
+	@Autowired
+	VegetableServices vegetableServices;
+
 	final String successStatus = "Success";
 
-	@PostMapping(value = "/addVegitableDetails", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/addVegitableDetails")
 	@Operation(summary = "सब्जी से सम्बंधित जानकारी ")
-	public ResponseEntity<Object> uploadImage(@Valid VegetableDetailsDTO vegetableDetailsDTO) {
+	public ResponseEntity<Object> addVegetableDetails(@RequestBody VegetableDetailsDTO vegetableDetailsDTO) {
 
-		String responseOfSave = itms.saveVegetableService(vegetableDetailsDTO);
+		String responseOfSave = vegetableServices.saveVegetableService(vegetableDetailsDTO);
 		if (successStatus.equals(responseOfSave)) {
 			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "",
 					vegetableDetailsDTO);
 		} else {
 			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
 					"", vegetableDetailsDTO);
+		}
+	}
+
+	@PostMapping(value = "/addVegitableDetailsWithId")
+	@Operation(summary = "सब्जी से सम्बंधित जानकारी ")
+	public ResponseEntity<Object> addVegitableDetailsWithId(@RequestBody VegetableDetailsDTO vegetableDetailsDTO) {
+
+		vegetableDetailsDTO = vegetableServices.saveVegetableServiceWithId(vegetableDetailsDTO);
+		if (vegetableDetailsDTO.getVegId() != 0) {
+			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "",
+					vegetableDetailsDTO);
+		} else {
+			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
+					"", vegetableDetailsDTO);
+		}
+	}
+
+	@PostMapping(value = "/addVegitablePic", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Operation(summary = "सब्जी ki photo ")
+	public ResponseEntity<Object> uploadImage(@Valid @RequestParam("pic") MultipartFile pic,
+			@RequestParam("userCode") String userCode, @RequestParam("vegId") String vegId) {
+
+		String responseOfSave = vegetableServices.saveVegeatableImage(pic, userCode, vegId);
+		if (successStatus.equals(responseOfSave)) {
+			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "", "U");
+		} else {
+			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
+					"", "N");
 		}
 	}
 

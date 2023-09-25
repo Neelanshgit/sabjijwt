@@ -1,31 +1,39 @@
 package com.sabji.model;
 
- 
-
 public class DriverDetailDTO {
 
-	private int id;
-	
+	private Long id;
+
 	private String driverName;
-	 
+
 	private String dVechileName;
-	
+
 	private String quantityOfVegetables;
-	
+
 	private int roundCount;
-	 
+
 	private String driverArea;
-	
+
 	private String vechileOwnerName;
-	
+
 	private String driverNumber;
 
-	public int getId() {
+	private String userCode;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
 	public String getDriverName() {
@@ -83,8 +91,5 @@ public class DriverDetailDTO {
 	public void setDriverNumber(String driverNumber) {
 		this.driverNumber = driverNumber;
 	}
-	
-	
-	
-	
+
 }
