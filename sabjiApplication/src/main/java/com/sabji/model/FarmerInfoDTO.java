@@ -34,6 +34,16 @@ public class FarmerInfoDTO {
 
 	private String quest4;
 
+	private String userCode;
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+
 	public String getFarmerName() {
 		return farmerName;
 	}

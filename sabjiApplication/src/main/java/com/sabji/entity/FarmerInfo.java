@@ -16,6 +16,9 @@ public class FarmerInfo {
 	@Column(name = "farmer_id")
 	private int farmerId;
 
+	@Column(name = "user_code")
+	private String userCode;
+
 	@Column(name = "farmer_name")
 	private String farmerName;
 
@@ -63,6 +66,38 @@ public class FarmerInfo {
 
 	@Column(name = "type_four_question")
 	private String quest4;
+
+	public int getFarmerId() {
+		return farmerId;
+	}
+
+	public void setFarmerId(int farmerId) {
+		this.farmerId = farmerId;
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+
+	public String getFarmerName() {
+		return farmerName;
+	}
+
+	public void setFarmerName(String farmerName) {
+		this.farmerName = farmerName;
+	}
+
+	public String getVegCurntCarrying() {
+		return vegCurntCarrying;
+	}
+
+	public void setVegCurntCarrying(String vegCurntCarrying) {
+		this.vegCurntCarrying = vegCurntCarrying;
+	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;

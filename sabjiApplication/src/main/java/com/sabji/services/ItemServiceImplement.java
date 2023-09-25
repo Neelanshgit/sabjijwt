@@ -2,10 +2,12 @@ package com.sabji.services;
 
 import java.util.List;
 
-import org.apache.tomcat.util.codec.binary.Base64;
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sabji.entity.DriverDetails;
 import com.sabji.entity.FarmerInfo;
@@ -13,7 +15,6 @@ import com.sabji.entity.FarmerInfoEntity;
 import com.sabji.entity.Items;
 import com.sabji.entity.VegetableEntity;
 import com.sabji.model.BasicDetailsDTO;
-import com.sabji.model.VegetableDetailsDTO;
 import com.sabji.repo.DeliveryPartnerRepo;
 import com.sabji.repo.DriverDetailRepo;
 import com.sabji.repo.FarmerInfoRepo;
@@ -43,11 +44,7 @@ public class ItemServiceImplement implements ItemService {
 	@Autowired
 	FarmerInfoRepo farmerrepo;
 
-//	@Override
-//	public Items itemservice(Items items) {
 //
-//		 return itemrepo.save(items);
-//	}
 	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ItemServiceImplement.class);
 
 	@Override
@@ -157,20 +154,9 @@ public class ItemServiceImplement implements ItemService {
 	}
 
 	@Override
-	public String saveVegetableService(VegetableDetailsDTO vegetableDetailsDTO) {
-
-		try {
-			vegetableDetailsDTO.setPic(Base64.encodeBase64(vegetableDetailsDTO.getImage().getBytes()));
-			VegetableEntity vegetableEntity = mapper.map(vegetableDetailsDTO, VegetableEntity.class);
-
-			vegetablerepo.save(vegetableEntity);
-			return "Success";
-
-		} catch (Exception e) {
-			log.error("there is an exception in  registring the user {} ", e.getMessage());
-			return "Error";
-		}
-
+	public String saveVegeatableImage(@Valid MultipartFile pic, String userCode, String vegId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

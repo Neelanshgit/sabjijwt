@@ -1,19 +1,14 @@
 package com.sabji.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-@JsonSerialize
 public class VegetableDetailsDTO {
 
-	// public int vegId;
+	public Long vegId;
 
 	private String vegetableName;
 
-	private MultipartFile Image;
+	// private MultipartFile image;
 
-	private byte[] pic;
+	// private byte[] pic;
 	private String timeperiod;
 
 	private String vegetableValidity;
@@ -24,16 +19,22 @@ public class VegetableDetailsDTO {
 
 	private String availability;
 
-	public MultipartFile getImage() {
-		return Image;
+	private String userCode;
+
+	public String getUserCode() {
+		return userCode;
 	}
 
-	public void setImage(MultipartFile image) {
-		Image = image;
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
-	public void setPic(byte[] pic) {
-		this.pic = pic;
+	public Long getVegId() {
+		return vegId;
+	}
+
+	public void setVegId(Long vegId) {
+		this.vegId = vegId;
 	}
 
 	public String getVegetableName() {
@@ -43,12 +44,6 @@ public class VegetableDetailsDTO {
 	public void setVegetableName(String vegetableName) {
 		this.vegetableName = vegetableName;
 	}
-
-	/*
-	 * public int getVegId() { return vegId; }
-	 *
-	 * public void setVegId(int vegId) { this.vegId = vegId; }
-	 */
 
 	public String getTimeperiod() {
 		return timeperiod;
@@ -89,5 +84,15 @@ public class VegetableDetailsDTO {
 	public void setAvailability(String availability) {
 		this.availability = availability;
 	}
+
+	/*
+	 * public MultipartFile getImage() { return image; }
+	 *
+	 * public void setImage(MultipartFile image) { this.image = image; }
+	 *
+	 * public byte[] getPic() { return pic; }
+	 *
+	 * public void setPic(byte[] pic) { this.pic = pic; }
+	 */
 
 }
