@@ -14,7 +14,7 @@ public class DriverDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "driver_id")
-	private Long id;
+	private Long driverId;
 
 	@Column(name = "driver_name")
 	private String driverName;
@@ -39,22 +39,6 @@ public class DriverDetails {
 
 	@Column(name = "user_code")
 	private String userCode;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getUserCode() {
-		return userCode;
-	}
-
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
-	}
 
 	public String getDriverName() {
 		return driverName;
@@ -112,15 +96,24 @@ public class DriverDetails {
 		this.driverNumber = driverNumber;
 	}
 
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+
 	@Override
 	public String toString() {
 		return "DriverDetails [driverName=" + driverName + ", dVechileName=" + dVechileName + ", quantityOfVegetables="
 				+ quantityOfVegetables + ", roundCount=" + roundCount + ", driverArea=" + driverArea
-				+ ", vechileOwnerName=" + vechileOwnerName + ", driverNumber=" + driverNumber + "]";
+				+ ", vechileOwnerName=" + vechileOwnerName + ", driverNumber=" + driverNumber + ", userCode=" + userCode
+				+ "]";
 	}
 
 	public DriverDetails(String driverName, String dVechileName, String quantityOfVegetables, int roundCount,
-			String driverArea, String vechileOwnerName, String driverNumber) {
+			String driverArea, String vechileOwnerName, String driverNumber, String userCode) {
 		super();
 		this.driverName = driverName;
 		this.dVechileName = dVechileName;
@@ -129,6 +122,7 @@ public class DriverDetails {
 		this.driverArea = driverArea;
 		this.vechileOwnerName = vechileOwnerName;
 		this.driverNumber = driverNumber;
+		this.userCode = userCode;
 	}
 
 	public DriverDetails() {
@@ -136,4 +130,5 @@ public class DriverDetails {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 }
