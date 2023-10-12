@@ -72,4 +72,15 @@ public class FarmerService {
 
 	}
 
+	public Long getfarmerCountByUserCode(String userCode) {
+		Long count = 0L;
+		try {
+			count = farmerInfoRepo.countByUserCode(userCode);
+			return count;
+		} catch (Exception e) {
+			log.error("there is an exception in  fetching the  image of the vegetable by vegName {} ", e.getMessage());
+			return count;
+		}
+	}
+
 }

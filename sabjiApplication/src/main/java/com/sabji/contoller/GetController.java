@@ -18,7 +18,7 @@ import com.sabji.entity.VegetableEntity;
 import com.sabji.model.BasicDetailsDTO;
 import com.sabji.model.ResponseWithList;
 import com.sabji.model.ResponseWithObject;
-import com.sabji.model.VegetableDetailsDTO;
+import com.sabji.model.VegetableDetailsDTO2;
 import com.sabji.services.FarmerService;
 import com.sabji.services.ItemService;
 import com.sabji.services.VegetableServices;
@@ -50,7 +50,7 @@ public class GetController {
 
 		List<BasicDetailsDTO> items = itemService.getallItems();
 
-		return new ResponseWithList().generateResponse("provided", HttpStatus.OK, "", items);
+		return new ResponseWithList().generateResponse("provided", HttpStatus.OK, "200", items);
 
 	}
 
@@ -58,7 +58,7 @@ public class GetController {
 	public ResponseEntity<?> findVegatableDetail() {
 
 		List<VegetableEntity> vegetableEntities = itemService.getallVegetableDetail();
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", vegetableEntities);
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "200", vegetableEntities);
 
 	}
 
@@ -66,7 +66,7 @@ public class GetController {
 	public ResponseEntity<?> findDeliveryPartner() {
 
 		List<FarmerInfoEntity> farmerInfoEntities = itemService.getallFarmardetail();
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", farmerInfoEntities);
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "200", farmerInfoEntities);
 
 	}
 
@@ -75,7 +75,7 @@ public class GetController {
 
 		List<FarmerInfo> farmerinformation = itemService.getallFarmerinfo();
 
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", farmerinformation);
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "200", farmerinformation);
 	}
 
 	@GetMapping("/findDriverDetails")
@@ -83,34 +83,34 @@ public class GetController {
 
 		List<DriverDetails> driverdetails = itemService.getdriverdetailsinfo();
 
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", driverdetails);
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "200", driverdetails);
 	}
 
 	@GetMapping("/getVegById")
 	@Operation(summary = "sabji khoje sabji ki id dwara")
 	public ResponseEntity<?> getVegById(@RequestParam("vegId") String vegId) {
 
-		VegetableDetailsDTO vegetableDetailsDTOs = vegetableServices.findVegetable(Long.parseLong(vegId));
+		VegetableDetailsDTO2 vegetableDetailsDTOs = vegetableServices.findVegetable(Long.parseLong(vegId));
 
-		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", vegetableDetailsDTOs);
+		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "200", vegetableDetailsDTOs);
 	}
 
 	@GetMapping("/getVegUserCode")
 	@Operation(summary = "sabji khoje userCode ke dwara")
 	public ResponseEntity<?> getVegUserCode(@RequestParam("userCode") String userCode) {
 
-		List<VegetableDetailsDTO> vegetableDetailsDTOs = vegetableServices.findVegetableByUserCode(userCode);
+		List<VegetableDetailsDTO2> vegetableDetailsDTOs = vegetableServices.findVegetableByUserCode(userCode);
 
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", vegetableDetailsDTOs);
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "200", vegetableDetailsDTOs);
 	}
 
 	@GetMapping("/getVegByName")
 	@Operation(summary = "sabji khoje nam se jitni bhi like me  ajae ")
 	public ResponseEntity<?> getVegByName(@RequestParam("vegName") String vegName) {
 
-		List<VegetableDetailsDTO> vegetableDetailsDTOs = vegetableServices.findVegetablebyName(vegName);
+		List<VegetableDetailsDTO2> vegetableDetailsDTOs = vegetableServices.findVegetablebyName(vegName);
 
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "", vegetableDetailsDTOs);
+		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "200", vegetableDetailsDTOs);
 	}
 
 	@GetMapping("/getVegCountByUserCode")
@@ -119,7 +119,16 @@ public class GetController {
 
 		Long count = vegetableServices.findVegetableCount(userCode);
 
-		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", count);
+		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "200", count);
+	}
+
+	@GetMapping("/getfarmerCountByUserCode")
+	@Operation(summary = "userCode ke hisab se sabji ka count nikale ")
+	public ResponseEntity<?> getfarmerCountByUserCode(@RequestParam("userCode") String userCode) {
+
+		Long count = farmerService.getfarmerCountByUserCode(userCode);
+
+		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "200", count);
 	}
 
 }
