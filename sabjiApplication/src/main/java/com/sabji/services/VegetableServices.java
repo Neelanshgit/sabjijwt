@@ -1,7 +1,6 @@
 package com.sabji.services;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sabji.entity.VegetableEntity;
 import com.sabji.model.VegetableDetailsDTO;
+import com.sabji.model.VegetableDetailsDTO2;
 import com.sabji.repo.VegetableRepo;
 import com.sabji.util.MapperUtil;
 
@@ -64,7 +64,7 @@ public class VegetableServices {
 		try {
 
 			VegetableEntity vegetableEntity = vegetablerepo.findByVegIdAndUserCode(Long.parseLong(vegId), userCode);
-			vegetableEntity.setPic(Base64.getEncoder().encode(pic.getBytes()));
+			// vegetableEntity.setPic(Base64.getEncoder().encode(pic.getBytes()));
 			vegetablerepo.save(vegetableEntity);
 			return "Success";
 
@@ -74,11 +74,11 @@ public class VegetableServices {
 		}
 	}
 
-	public VegetableDetailsDTO findVegetable(Long vegId) {
-		VegetableDetailsDTO vegetableDetailsDTO = new VegetableDetailsDTO();
+	public VegetableDetailsDTO2 findVegetable(Long vegId) {
+		VegetableDetailsDTO2 vegetableDetailsDTO = new VegetableDetailsDTO2();
 		try {
 			VegetableEntity vegetableEntity = vegetablerepo.findByVegId(vegId);
-			vegetableDetailsDTO = mapper.map(vegetableEntity, VegetableDetailsDTO.class);
+			vegetableDetailsDTO = mapper.map(vegetableEntity, VegetableDetailsDTO2.class);
 			return vegetableDetailsDTO;
 		} catch (Exception e) {
 			log.error("there is an exception in  fetching the  image of the vegetable by ID {} ", e.getMessage());
@@ -87,11 +87,11 @@ public class VegetableServices {
 
 	}
 
-	public List<VegetableDetailsDTO> findVegetableByUserCode(String userCode) {
-		List<VegetableDetailsDTO> vegetableDetailsDTO = new ArrayList<>();
+	public List<VegetableDetailsDTO2> findVegetableByUserCode(String userCode) {
+		List<VegetableDetailsDTO2> vegetableDetailsDTO = new ArrayList<>();
 		try {
 			List<VegetableEntity> vegetableEntity = vegetablerepo.findByUserCode(userCode);
-			vegetableDetailsDTO = mapperUtil.mapList(vegetableEntity, VegetableDetailsDTO.class);
+			vegetableDetailsDTO = mapperUtil.mapList(vegetableEntity, VegetableDetailsDTO2.class);
 			return vegetableDetailsDTO;
 		} catch (Exception e) {
 			log.error("there is an exception in  fetching the  image of the vegetable by usercode {} ", e.getMessage());
@@ -100,11 +100,11 @@ public class VegetableServices {
 
 	}
 
-	public List<VegetableDetailsDTO> findVegetablebyName(String vegName) {
-		List<VegetableDetailsDTO> vegetableDetailsDTO = new ArrayList<>();
+	public List<VegetableDetailsDTO2> findVegetablebyName(String vegName) {
+		List<VegetableDetailsDTO2> vegetableDetailsDTO = new ArrayList<>();
 		try {
 			List<VegetableEntity> vegetableEntity = vegetablerepo.findByVegetableNameLike(vegName);
-			vegetableDetailsDTO = mapperUtil.mapList(vegetableEntity, VegetableDetailsDTO.class);
+			vegetableDetailsDTO = mapperUtil.mapList(vegetableEntity, VegetableDetailsDTO2.class);
 			return vegetableDetailsDTO;
 		} catch (Exception e) {
 			log.error("there is an exception in  fetching the  image of the vegetable by vegName {} ", e.getMessage());
@@ -122,6 +122,21 @@ public class VegetableServices {
 		} catch (Exception e) {
 			log.error("there is an exception in  fetching the  image of the vegetable by vegName {} ", e.getMessage());
 			return count;
+		}
+
+	}
+
+	public VegetableDetailsDTO2 saveVegitableWithImage(VegetableDetailsDTO2 vegetableDetailsDTO) {
+
+		try {
+			VegetableEntity vegetableEntity = mapper.map(vegetableDetailsDTO, VegetableEntity.class);
+			vegetableEntity = vegetablerepo.save(vegetableEntity);
+			vegetableDetailsDTO = mapper.map(vegetableEntity, VegetableDetailsDTO2.class);
+			return vegetableDetailsDTO;
+
+		} catch (Exception e) {
+			log.error("there is an exception in  registring the user {} ", e.getMessage());
+			return vegetableDetailsDTO;
 		}
 
 	}
