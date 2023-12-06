@@ -1,5 +1,7 @@
 package com.sabji.contoller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +26,8 @@ public class DriverDetailController {
 	@GetMapping("/getDriverByUserCode")
 	@Operation(summary = "ड्राईवर कोड से ड्राईवर की जानकारी निकाले ")
 	public ResponseEntity<?> getDriverDetailsByUserCode(@RequestParam("userCode") String userCode) {
-
-		DriverDetailDTO driverdetaildto = driverdetailservice.findByuserCode(userCode);
-		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", driverdetaildto);
+		List<DriverDetailDTO> driverDetailDTOs = driverdetailservice.findByuserCode(userCode);
+		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "", driverDetailDTOs);
 	}
 
 	@GetMapping("/getDriverByMobileno")
