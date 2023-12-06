@@ -29,13 +29,10 @@ import com.sabji.util.FileProtectCheck;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-
-
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("api")
-@Tag(name="File-Controller")
+@Tag(name = "ZFile Related API")
 public class BlobController {
 
 	@Autowired
@@ -44,35 +41,39 @@ public class BlobController {
 	@Autowired
 	FileProtectCheck fpc;
 
-	
-	List<String> allowedContentType= Arrays.asList("application/pdf","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/rtf","application/vnd.ms-excel");
-	
+	List<String> allowedContentType = Arrays.asList("application/pdf",
+			"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/rtf",
+			"application/vnd.ms-excel");
+
 	@GetMapping(value = "/hi")
 	public ResponseEntity<String> test() {
 		return ResponseEntity.ok("its in air");
 	}
 
 	@PostMapping(value = "/singlefile")
-	public ResponseEntity<Object> ImageSaver(@RequestParam("appCode") String appCode,@RequestParam("fileCode") String fileCode ,
-			@RequestParam("file") MultipartFile file,
+	public ResponseEntity<Object> ImageSaver(@RequestParam("appCode") String appCode,
+			@RequestParam("fileCode") String fileCode, @RequestParam("file") MultipartFile file,
 			@RequestParam("moduleCode") String moduleCode, ModelMap map) {
 		System.out.println(file.getOriginalFilename());
 		if (!file.isEmpty()) {
 			if (!allowedContentType.contains(file.getContentType())) {
-			     return Response2.generateResponse(file.getOriginalFilename() +", is not a valid file", HttpStatus.OK, "003");	
+				return Response2.generateResponse(file.getOriginalFilename() + ", is not a valid file", HttpStatus.OK,
+						"003");
 			}
-			if(file.getContentType().equals("application/pdf")) {
-				boolean b= fpc.encrytedOrNot((file));
+			if (file.getContentType().equals("application/pdf")) {
+				boolean b = fpc.encrytedOrNot((file));
 				System.out.println(b);
 				if (b) {// case of encryption
-					return Response2.generateResponse("Kindly provide  the key for:-" + file.getOriginalFilename(),HttpStatus.OK, "001");
+					return Response2.generateResponse("Kindly provide  the key for:-" + file.getOriginalFilename(),
+							HttpStatus.OK, "001");
 				}
-			}	
-			String result = bService.singlefile(appCode, file, moduleCode,map);
+			}
+			String result = bService.singlefile(appCode, file, moduleCode, map);
 			if (result.equals("D")) {
-				HashMap<String,String> hash = new HashMap<>();
-				hash.put(fileCode,file.getContentType());
-				return ResponseWithFileCode.generateResponse("Success", HttpStatus.OK, "200",hash);
+				HashMap<String, String> hash = new HashMap<>();
+				hash.put(fileCode, file.getContentType());
+				return ResponseWithFileCode.generateResponse("Success", HttpStatus.OK, "200", hash);
 			} else {
 				return ResponseEntity.internalServerError().body("something went wrong");
 			}
@@ -81,6 +82,7 @@ public class BlobController {
 		}
 
 	}
+
 	@PostMapping(value = "/mFI2")
 	public ResponseEntity<Object> ImageSaverArray3(@RequestParam("appCode") String appCode,
 			@RequestParam("file") MultipartFile[] dataSet, @RequestParam("moduleCode") String moduleCode,
@@ -91,37 +93,39 @@ public class BlobController {
 		System.out.println("number of files :" + dataSet.length + ",for appcode->" + appCode + " with "
 				+ fileCode.length + "of filecode");
 		try {
-			
+
 			if (dataSet.length != 0) {
-				//ArrayList<MultipartFile> listofdataSet = (ArrayList<MultipartFile>) Arrays.asList(dataSet);
-			
-			
+				// ArrayList<MultipartFile> listofdataSet = (ArrayList<MultipartFile>)
+				// Arrays.asList(dataSet);
+
 				for (int i = 0; i < dataSet.length; i++) {
-					//if (!dataSet[i].getContentType().equals("application/pdf")) {
+					// if (!dataSet[i].getContentType().equals("application/pdf")) {
 					/*
 					 * if (!dataSet[i].getContentType().equals("application/pdf")) { return
 					 * Response2.generateResponse(dataSet[i].getOriginalFilename() +
 					 * ", is not a valid file", HttpStatus.OK, "003"); }
 					 */
-					
+
 					if (!allowedContentType.contains(dataSet[i].getContentType())) {
-					     return Response2.generateResponse(dataSet[i].getOriginalFilename() +", is not a valid file", HttpStatus.OK, "003");	
+						return Response2.generateResponse(dataSet[i].getOriginalFilename() + ", is not a valid file",
+								HttpStatus.OK, "003");
 					}
-					
+
 					System.out.println(dataSet[i].getContentType());
 					System.out.println("inside the loop for check " + dataSet[i].getOriginalFilename());
 					if (dataSet[i] == null) {
 						dbResponse.put(fileCode[i], "Closed");
 					} else {
 						if (!dataSet[i].isEmpty()) {
-							boolean b=false;
-							if(dataSet[i].getContentType().equals("application/pdf")) {
-								 b= fpc.encrytedOrNot((dataSet[i]));
+							boolean b = false;
+							if (dataSet[i].getContentType().equals("application/pdf")) {
+								b = fpc.encrytedOrNot((dataSet[i]));
 								System.out.println(b);
-								
-							}					
+
+							}
 							if (b) {// case of encryption
-								return Response2.generateResponse("Kindly provide  the key for:-" + dataSet[i].getOriginalFilename(),
+								return Response2.generateResponse(
+										"Kindly provide  the key for:-" + dataSet[i].getOriginalFilename(),
 										HttpStatus.OK, "001");
 							} else {
 
@@ -157,7 +161,7 @@ public class BlobController {
 
 	@PostMapping(value = "/mFI3")
 	public ResponseEntity<Object> ImageSaverArray4(@RequestParam("appCode") String appCode,
-			@RequestParam("file") List<MultipartFile> dataSet,  @RequestParam("moduleCode") String moduleCode,
+			@RequestParam("file") List<MultipartFile> dataSet, @RequestParam("moduleCode") String moduleCode,
 			@RequestParam("fileCode") List<String> fileCode, ModelMap map) {
 
 		HashMap<String, MultipartFile> dataToBeSaved = new HashMap<>();
@@ -169,28 +173,30 @@ public class BlobController {
 
 			if (dataSet.size() != 0) {
 				for (int i = 0; i < dataSet.size(); i++) {
-				if (dataSet.get(i) == null) {
+					if (dataSet.get(i) == null) {
 						dbResponse.put(fileCode.get(i), "Closed");
 					} else {
 						if (!dataSet.get(i).isEmpty()) {
 
-						
-							if(allowedContentType.contains(dataSet.get(i).getContentType())){
-								boolean b=false;
-								if(dataSet.get(i).getContentType().equals("application/pdf")) {
-									 b= fpc.encrytedOrNot((dataSet.get(i)));
+							if (allowedContentType.contains(dataSet.get(i).getContentType())) {
+								boolean b = false;
+								if (dataSet.get(i).getContentType().equals("application/pdf")) {
+									b = fpc.encrytedOrNot((dataSet.get(i)));
 									System.out.println(b);
-									
+
 								}
 								if (b) {
 									return Response2.generateResponse(
-											"Kindly provide  the key for:-" + dataSet.get(i).getOriginalFilename(),HttpStatus.OK, "001");
+											"Kindly provide  the key for:-" + dataSet.get(i).getOriginalFilename(),
+											HttpStatus.OK, "001");
 								} else {
 
 									dataToBeSaved.put(fileCode.get(i), dataSet.get(i));
 								}
 							} else {
-								return Response2.generateResponse("Kindly select a valid type:-" + dataSet.get(i).getOriginalFilename(),HttpStatus.OK, "001");
+								return Response2.generateResponse(
+										"Kindly select a valid type:-" + dataSet.get(i).getOriginalFilename(),
+										HttpStatus.OK, "001");
 							}
 
 						} else {
@@ -228,9 +234,9 @@ public class BlobController {
 
 	}
 
-
 	@PostMapping(value = "/dowloadContent")
-	public ResponseEntity<Object> ApiForDownload(@RequestParam("fileCode") String fileCode,@RequestParam("module") String module) {
+	public ResponseEntity<Object> ApiForDownload(@RequestParam("fileCode") String fileCode,
+			@RequestParam("module") String module) {
 
 		System.out.println(fileCode);
 		String filebytes = null;
@@ -238,8 +244,10 @@ public class BlobController {
 		return ResponseWithFCDwonload2.generateResponse("Success", HttpStatus.OK, "200", filebytes);
 
 	}
+
 	@PostMapping(value = "/dowloadbytes")
-	public ResponseEntity<Object> ApiForDownload1(@RequestParam("fileCode") String fileCode,@RequestParam("module") String module) {
+	public ResponseEntity<Object> ApiForDownload1(@RequestParam("fileCode") String fileCode,
+			@RequestParam("module") String module) {
 
 		System.out.println(fileCode);
 		byte[] filebytes = null;
@@ -247,8 +255,10 @@ public class BlobController {
 		return ResponseWithFCDwonload.generateResponse("Success", HttpStatus.OK, "200", filebytes);
 
 	}
+
 	@PostMapping(value = "/dowloadpurebytes")
-	public ResponseEntity<Object> ApiForDownload3(@RequestParam("fileCode") String fileCode,@RequestParam("module") String module) {
+	public ResponseEntity<Object> ApiForDownload3(@RequestParam("fileCode") String fileCode,
+			@RequestParam("module") String module) {
 
 		System.out.println(fileCode);
 		byte[] filebytes = null;
@@ -258,28 +268,7 @@ public class BlobController {
 	}
 
 	@PostMapping(value = "/fileSearch")
-	public ResponseEntity<Object> ApiForSearch(@RequestParam("appCode") String appCode,@RequestParam("module") String module) {
-
-		System.out.println(appCode);
-
-		List<FileSaveWithFileCode> list = bService.searchService(appCode);
-		HashMap<String, String> hash = new HashMap<>();
-		list.stream().forEach(c -> {
-
-			hash.put(c.getFileCode(), c.getName());
-		});
-
-		if (hash.isEmpty()) {
-			return ResponseForSearch.generateResponse("Success", HttpStatus.OK, "016", hash);
-		} else {
-			return ResponseForSearch.generateResponse("Success", HttpStatus.OK, "015", hash);
-		}
-
-	}
-
-	
-	@PostMapping(value = "/fileSearchbyFileCode")
-	public ResponseEntity<Object> ApiForSearchwith(@RequestParam("appCode") String appCode,@RequestParam("fileCode") String fileCode,
+	public ResponseEntity<Object> ApiForSearch(@RequestParam("appCode") String appCode,
 			@RequestParam("module") String module) {
 
 		System.out.println(appCode);
@@ -298,11 +287,31 @@ public class BlobController {
 		}
 
 	}
-	
-	
+
+	@PostMapping(value = "/fileSearchbyFileCode")
+	public ResponseEntity<Object> ApiForSearchwith(@RequestParam("appCode") String appCode,
+			@RequestParam("fileCode") String fileCode, @RequestParam("module") String module) {
+
+		System.out.println(appCode);
+
+		List<FileSaveWithFileCode> list = bService.searchService(appCode);
+		HashMap<String, String> hash = new HashMap<>();
+		list.stream().forEach(c -> {
+
+			hash.put(c.getFileCode(), c.getName());
+		});
+
+		if (hash.isEmpty()) {
+			return ResponseForSearch.generateResponse("Success", HttpStatus.OK, "016", hash);
+		} else {
+			return ResponseForSearch.generateResponse("Success", HttpStatus.OK, "015", hash);
+		}
+
+	}
+
 	@DeleteMapping(value = "/filedelbyFC")
-	public ResponseEntity<Object> ApiFodelte(@RequestParam("appCode") String appCode,@RequestParam("fileCode") String fileCode,
-			@RequestParam("module") String module ) {
+	public ResponseEntity<Object> ApiFodelte(@RequestParam("appCode") String appCode,
+			@RequestParam("fileCode") String fileCode, @RequestParam("module") String module) {
 
 		System.out.println(fileCode);
 

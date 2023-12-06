@@ -1,5 +1,8 @@
 package com.sabji.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.sabji.entity.FarmerInfo;
 import com.sabji.model.FarmerInfoDTO;
 import com.sabji.repo.FarmerInfoRepo;
+import com.sabji.util.MapperUtil;
 
 @Service
 public class FarmerService {
@@ -17,6 +21,9 @@ public class FarmerService {
 
 	@Autowired
 	FarmerInfoRepo farmerInfoRepo;
+
+	@Autowired
+	MapperUtil mapperUtil;
 	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(FarmerService.class);
 
 	public String saveFarmerData(@Valid FarmerInfoDTO farmerInfoDTO) {
@@ -80,6 +87,22 @@ public class FarmerService {
 		} catch (Exception e) {
 			log.error("there is an exception in  fetching the  image of the vegetable by vegName {} ", e.getMessage());
 			return count;
+		}
+	}
+
+	public List<FarmerInfo> getallFarmerinfo() {
+		return farmerInfoRepo.findAll();
+	}
+
+	public List<FarmerInfoDTO> getfarmerByUserCode(String userCode) {
+		List<FarmerInfoDTO> farmerInfoDTOs = new ArrayList<>();
+		try {
+			List<FarmerInfo> farmerInfo = farmerInfoRepo.findByUserCode(userCode);
+			farmerInfoDTOs = mapperUtil.mapList(farmerInfo, FarmerInfoDTO.class);
+			return farmerInfoDTOs;
+		} catch (Exception e) {
+			log.error("there is an exception in  getting the farmer {} ", e.getMessage());
+			return farmerInfoDTOs;
 		}
 	}
 

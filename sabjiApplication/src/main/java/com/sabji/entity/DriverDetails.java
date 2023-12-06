@@ -40,6 +40,14 @@ public class DriverDetails {
 	@Column(name = "user_code")
 	private String userCode;
 
+	public Long getDriverId() {
+		return driverId;
+	}
+
+	public void setDriverId(Long driverId) {
+		this.driverId = driverId;
+	}
+
 	public String getDriverName() {
 		return driverName;
 	}
@@ -130,5 +138,4 @@ public class DriverDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 }

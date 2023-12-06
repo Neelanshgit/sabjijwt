@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sabji.entity.DriverDetails;
-import com.sabji.entity.FarmerInfo;
 import com.sabji.entity.FarmerInfoEntity;
 import com.sabji.entity.VegetableEntity;
 import com.sabji.model.BasicDetailsDTO;
@@ -70,14 +69,6 @@ public class GetController {
 
 	}
 
-	@GetMapping("/findFarmer")
-	public ResponseEntity<?> findfarmer() {
-
-		List<FarmerInfo> farmerinformation = itemService.getallFarmerinfo();
-
-		return new ResponseWithList().generateResponse("provide", HttpStatus.OK, "200", farmerinformation);
-	}
-
 	@GetMapping("/findDriverDetails")
 	public ResponseEntity<?> findDriver() {
 
@@ -118,15 +109,6 @@ public class GetController {
 	public ResponseEntity<?> getVegCountByUserCode(@RequestParam("userCode") String userCode) {
 
 		Long count = vegetableServices.findVegetableCount(userCode);
-
-		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "200", count);
-	}
-
-	@GetMapping("/getfarmerCountByUserCode")
-	@Operation(summary = "userCode ke hisab se sabji ka count nikale ")
-	public ResponseEntity<?> getfarmerCountByUserCode(@RequestParam("userCode") String userCode) {
-
-		Long count = farmerService.getfarmerCountByUserCode(userCode);
 
 		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "200", count);
 	}

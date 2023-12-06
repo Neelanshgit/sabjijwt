@@ -2,7 +2,7 @@ package com.sabji.model;
 
 public class VegetableDetailsDTO {
 
-	public Long vegId;
+	private Long vegId;
 
 	private String vegetableName;
 

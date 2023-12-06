@@ -21,30 +21,26 @@ public class DriverDetailService {
 	@Autowired
 	ModelMapper mapper;
 
-	
 	@Autowired
 	MapperUtil mapperUtil;
-	
+
 	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DriverDetailService.class);
 
-	//DriverDetailDTO driverdetaildto = null;
-	
-	
 	public List<DriverDetailDTO> findByuserCode(String userCode) {
-		List<DriverDetailDTO> driverdetaildto =new ArrayList<>();
+		List<DriverDetailDTO> driverdetaildto = new ArrayList<>();
 		try {
 			List<DriverDetails> driverdetails = driverdetailrepo.findByUserCode(userCode);
 			driverdetaildto = mapperUtil.mapList(driverdetails, DriverDetailDTO.class);
 			return driverdetaildto;
 		} catch (Exception e) {
-			log.error("there is an exception in  fetching the  image of the vegetable by ID {} ", e.getMessage());
+			log.error("there is an exception in  fetching the  driver details {} ", e.getMessage());
 			return driverdetaildto;
 		}
 
 	}
 
 	public DriverDetailDTO findByDriverbydriverNumber(String driverNumber) {
-		DriverDetailDTO driverdetaildto = new   DriverDetailDTO();
+		DriverDetailDTO driverdetaildto = new DriverDetailDTO();
 		try {
 			DriverDetails driverdetails = driverdetailrepo.findByDriverNumber(driverNumber);
 			driverdetaildto = mapper.map(driverdetails, DriverDetailDTO.class);
@@ -56,7 +52,7 @@ public class DriverDetailService {
 	}
 
 	public DriverDetailDTO findByDriverbydriverarea(String area) {
-		DriverDetailDTO driverdetaildto = new   DriverDetailDTO();
+		DriverDetailDTO driverdetaildto = new DriverDetailDTO();
 		try {
 			DriverDetails driverdetails = driverdetailrepo.findByDriverArea(area);
 			driverdetaildto = mapper.map(driverdetails, DriverDetailDTO.class);
