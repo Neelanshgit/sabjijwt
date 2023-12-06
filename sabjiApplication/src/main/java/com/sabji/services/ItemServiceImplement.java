@@ -55,10 +55,11 @@ public class ItemServiceImplement implements ItemService {
 
 	@Override
 	public FarmerInfoEntity farmerService(FarmerInfoEntity farmerentity) {
-		// TODO Auto-generated method stub
+
 		return deliveryrepo.save(farmerentity);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<BasicDetailsDTO> getallItems() {
 
@@ -77,43 +78,43 @@ public class ItemServiceImplement implements ItemService {
 
 	@Override
 	public List<Items> getItemsById() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public List<FarmerInfoEntity> getallFarmardetail() {
-		// TODO Auto-generated method stub
+
 		return deliveryrepo.findAll();
 	}
 
 	@Override
 	public List<FarmerInfoEntity> getFarmerdetailById() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public List<VegetableEntity> getallVegetableDetail() {
-		// TODO Auto-generated method stub
+
 		return vegetablerepo.findAll();
 	}
 
 	@Override
 	public List<VegetableEntity> getVegetableDetailById() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public FarmerInfo farmerinfo(FarmerInfo farmerinformation) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public DriverDetails driverdetailservice(DriverDetails driverdetails) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -124,19 +125,19 @@ public class ItemServiceImplement implements ItemService {
 
 	@Override
 	public List<FarmerInfo> getFarmerinfoById() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public List<DriverDetails> getdriverdetailsinfo() {
-		// TODO Auto-generated method stub
+
 		return driverrepo.findAll();
 	}
 
 	@Override
 	public List<DriverDetails> getdrivDetailsById() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -155,7 +156,7 @@ public class ItemServiceImplement implements ItemService {
 
 	@Override
 	public String saveVegeatableImage(@Valid MultipartFile pic, String userCode, String vegId) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 

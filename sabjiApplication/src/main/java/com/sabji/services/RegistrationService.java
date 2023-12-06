@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sabji.entity.GdmsApiUsers;
+import com.sabji.model.ProfileModel;
 import com.sabji.model.RegisterModal;
 import com.sabji.repo.GdmsApiUserRepo;
 
@@ -58,6 +59,25 @@ public class RegistrationService {
 		} catch (Exception e) {
 			log.error("there is an exception in  registring the user {} ", e.getMessage());
 			return "A";
+		}
+
+	}
+
+	public ProfileModel getProfileData(String userCode) {
+		ProfileModel profile = new ProfileModel();
+		try {
+
+			Optional<GdmsApiUsers> users = gdmsApiUserRepo.findByMobileNo(userCode);
+			if (users.isPresent()) {
+				profile.setEmail(users.get().getEmail());
+				profile.setMobileno(userCode);
+			}
+
+			return profile;
+
+		} catch (Exception e) {
+			log.error("there is an exception in  registring the user {} ", e.getMessage());
+			return profile;
 		}
 
 	}

@@ -2,7 +2,7 @@ package com.sabji.model;
 
 public class DriverDetailDTO {
 
-	private Long id;
+	private Long driverId;
 
 	private String driverName;
 
@@ -20,12 +20,12 @@ public class DriverDetailDTO {
 
 	private String userCode;
 
-	public Long getId() {
-		return id;
+	public Long getDriverId() {
+		return driverId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setDriverId(Long driverId) {
+		this.driverId = driverId;
 	}
 
 	public String getUserCode() {

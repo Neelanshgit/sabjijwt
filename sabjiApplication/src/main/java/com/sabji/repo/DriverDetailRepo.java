@@ -1,5 +1,7 @@
 package com.sabji.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,11 +10,11 @@ import com.sabji.entity.DriverDetails;
 @Repository
 public interface DriverDetailRepo extends JpaRepository<DriverDetails, Long> {
 
-	DriverDetails findByuserCode(String userCode);
+	List<DriverDetails> findByUserCode(String userCode);
 
-	DriverDetails findBydriverNumber(String driverNumber);
+	DriverDetails findByDriverNumber(String driverNumber);
 
-	DriverDetails findBydriverArea(String area);
+	DriverDetails findByDriverArea(String area);
 
 	Long countByUserCode(String userCode);
 

@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,15 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sabji.entity.DriverDetails;
 import com.sabji.entity.FarmerInfoEntity;
-import com.sabji.model.DriverDetailDTO;
-import com.sabji.model.FarmerInfoDTO;
 import com.sabji.model.ResponseWithObject;
 import com.sabji.model.VegetableDetailsDTO;
 import com.sabji.model.VegetableDetailsDTO2;
-import com.sabji.services.FarmerService;
 import com.sabji.services.ItemService;
 import com.sabji.services.VegetableServices;
 import com.sabji.services.VehcileService;
+import com.sabji.util.AppConstants;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,27 +38,22 @@ public class PostController {
 	ItemService itms;
 
 	@Autowired
-	FarmerService farmerService;
-
-	@Autowired
 	VehcileService vehcileService;
 
 	@Autowired
 	VegetableServices vegetableServices;
-
-	final String successStatus = "Success";
 
 	@PostMapping(value = "/addVegitableDetails")
 	@Operation(summary = "सब्जी से सम्बंधित जानकारी ")
 	public ResponseEntity<Object> addVegetableDetails(@RequestBody VegetableDetailsDTO vegetableDetailsDTO) {
 
 		String responseOfSave = vegetableServices.saveVegetableService(vegetableDetailsDTO);
-		if (successStatus.equals(responseOfSave)) {
-			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "200",
+		if (AppConstants.SUCCESSSTATUS.equals(responseOfSave)) {
+			return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
 					vegetableDetailsDTO);
 		} else {
-			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
-					"500", vegetableDetailsDTO);
+			return new ResponseWithObject().generateResponse(AppConstants.INTERNALERROR,
+					HttpStatus.INTERNAL_SERVER_ERROR, "500", vegetableDetailsDTO);
 		}
 	}
 
@@ -69,11 +63,11 @@ public class PostController {
 
 		vegetableDetailsDTO = vegetableServices.saveVegetableServiceWithId(vegetableDetailsDTO);
 		if (vegetableDetailsDTO.getVegId() != 0) {
-			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "200",
+			return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
 					vegetableDetailsDTO);
 		} else {
-			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
-					"500", vegetableDetailsDTO);
+			return new ResponseWithObject().generateResponse(AppConstants.INTERNALERROR,
+					HttpStatus.INTERNAL_SERVER_ERROR, "500", vegetableDetailsDTO);
 		}
 	}
 
@@ -83,40 +77,12 @@ public class PostController {
 			@RequestParam("userCode") String userCode, @RequestParam("vegId") String vegId) {
 
 		String responseOfSave = vegetableServices.saveVegeatableImage(pic, userCode, vegId);
-		if (successStatus.equals(responseOfSave)) {
-			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "200", "U");
+		if (AppConstants.SUCCESSSTATUS.equals(responseOfSave)) {
+			return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200", "U");
 		} else {
-			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
-					"500", "N");
+			return new ResponseWithObject().generateResponse(AppConstants.INTERNALERROR,
+					HttpStatus.INTERNAL_SERVER_ERROR, "500", "N");
 		}
-	}
-
-	@PostMapping("/addKisanData")
-	@Operation(summary = "किसान से सम्बंधित जानकारी ")
-	public ResponseEntity<Object> addItems(@Valid @RequestBody FarmerInfoDTO farmerInfoDTO) {
-
-		String responseOfSave = farmerService.saveFarmerData(farmerInfoDTO);
-		if (successStatus.equals(responseOfSave)) {
-			return new ResponseWithObject().generateResponse("Farmer saved successfully", HttpStatus.OK, "200",
-					farmerInfoDTO);
-		} else {
-			return new ResponseWithObject().generateResponse("not saved", HttpStatus.OK, "500", farmerInfoDTO);
-		}
-
-	}
-
-	@PostMapping("/addDriverDetails")
-	@Operation(summary = " वाहन  चालक और उससे सम्बंधित ")
-	public ResponseEntity<Object> driverdetail(@Valid @RequestBody DriverDetailDTO driverDetailDTO) {
-
-		String responseOfSave = vehcileService.saveDriverData(driverDetailDTO);
-		if (successStatus.equals(responseOfSave)) {
-			return new ResponseWithObject().generateResponse("driver saved successfully", HttpStatus.OK, "200",
-					driverDetailDTO);
-		} else {
-			return new ResponseWithObject().generateResponse("not saved", HttpStatus.OK, "500", driverDetailDTO);
-		}
-
 	}
 
 	@PostMapping("/deliveryPartnerDetails")
@@ -140,11 +106,29 @@ public class PostController {
 
 		vegetableDetailsDTO = vegetableServices.saveVegitableWithImage(vegetableDetailsDTO);
 		if (vegetableDetailsDTO.getVegId() != 0) {
-			return new ResponseWithObject().generateResponse("vegetable saved successfully", HttpStatus.OK, "200",
+			return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
 					vegetableDetailsDTO);
 		} else {
-			return new ResponseWithObject().generateResponse("some thing went wrong", HttpStatus.INTERNAL_SERVER_ERROR,
-					"500", vegetableDetailsDTO);
+			return new ResponseWithObject().generateResponse(AppConstants.INTERNALERROR,
+					HttpStatus.INTERNAL_SERVER_ERROR, "500", vegetableDetailsDTO);
+		}
+	}
+
+	@PutMapping(value = "/updateVegetable")
+	@Operation(summary = "updation of the vegetable ")
+	public ResponseEntity<Object> updateVegetable(@RequestBody VegetableDetailsDTO vegetableDetailsDTO) {
+
+		if (vegetableDetailsDTO.getVegId() == 0 || vegetableDetailsDTO.getVegId() == 0L) {
+			return new ResponseWithObject().generateResponse("missing unique id ", HttpStatus.BAD_REQUEST, "400",
+					vegetableDetailsDTO);
+		}
+		vegetableDetailsDTO = vegetableServices.saveVegetableServiceWithId(vegetableDetailsDTO);
+		if (vegetableDetailsDTO.getVegId() != 0) {
+			return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
+					vegetableDetailsDTO);
+		} else {
+			return new ResponseWithObject().generateResponse(AppConstants.INTERNALERROR,
+					HttpStatus.INTERNAL_SERVER_ERROR, "500", vegetableDetailsDTO);
 		}
 	}
 
