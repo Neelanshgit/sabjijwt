@@ -1,5 +1,8 @@
 package com.sabji.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sabji.entity.DriverDetails;
 import com.sabji.model.DriverDetailDTO;
 import com.sabji.repo.DriverDetailRepo;
+import com.sabji.util.MapperUtil;
 
 @Service
 public class DriverDetailService {
@@ -17,15 +21,20 @@ public class DriverDetailService {
 	@Autowired
 	ModelMapper mapper;
 
+	
+	@Autowired
+	MapperUtil mapperUtil;
+	
 	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DriverDetailService.class);
 
-	DriverDetailDTO driverdetaildto = null;
-
-	public DriverDetailDTO findByuserCode(String userCode) {
-
+	//DriverDetailDTO driverdetaildto = null;
+	
+	
+	public List<DriverDetailDTO> findByuserCode(String userCode) {
+		List<DriverDetailDTO> driverdetaildto =new ArrayList<>();
 		try {
-			DriverDetails driverdetails = driverdetailrepo.findByuserCode(userCode);
-			driverdetaildto = mapper.map(driverdetails, DriverDetailDTO.class);
+			List<DriverDetails> driverdetails = driverdetailrepo.findByUserCode(userCode);
+			driverdetaildto = mapperUtil.mapList(driverdetails, DriverDetailDTO.class);
 			return driverdetaildto;
 		} catch (Exception e) {
 			log.error("there is an exception in  fetching the  image of the vegetable by ID {} ", e.getMessage());
@@ -35,9 +44,9 @@ public class DriverDetailService {
 	}
 
 	public DriverDetailDTO findByDriverbydriverNumber(String driverNumber) {
-
+		DriverDetailDTO driverdetaildto = new   DriverDetailDTO();
 		try {
-			DriverDetails driverdetails = driverdetailrepo.findBydriverNumber(driverNumber);
+			DriverDetails driverdetails = driverdetailrepo.findByDriverNumber(driverNumber);
 			driverdetaildto = mapper.map(driverdetails, DriverDetailDTO.class);
 			return driverdetaildto;
 		} catch (Exception e) {
@@ -47,8 +56,9 @@ public class DriverDetailService {
 	}
 
 	public DriverDetailDTO findByDriverbydriverarea(String area) {
+		DriverDetailDTO driverdetaildto = new   DriverDetailDTO();
 		try {
-			DriverDetails driverdetails = driverdetailrepo.findBydriverArea(area);
+			DriverDetails driverdetails = driverdetailrepo.findByDriverArea(area);
 			driverdetaildto = mapper.map(driverdetails, DriverDetailDTO.class);
 			return driverdetaildto;
 		} catch (Exception e) {
