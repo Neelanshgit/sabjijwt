@@ -26,7 +26,7 @@ public class DriverDetailService {
 
 	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DriverDetailService.class);
 
-	public List<DriverDetailDTO> findByuserCode(String userCode) {
+	public List<DriverDetailDTO> findDriverDetailsByuserCode(String userCode) {
 		List<DriverDetailDTO> driverdetaildto = new ArrayList<>();
 		try {
 			List<DriverDetails> driverdetails = driverdetailrepo.findByUserCode(userCode);
@@ -74,4 +74,18 @@ public class DriverDetailService {
 			return count;
 		}
 	}
+	public List<DriverDetailDTO> findAllDriverDetailsByUserCode(String userCode) {
+		List<DriverDetailDTO> driverdetaildto = new ArrayList<>();
+		try {
+			List<DriverDetails> driverdetails = driverdetailrepo.findAllByUserCode(userCode);
+			driverdetaildto = mapperUtil.mapList(driverdetails, DriverDetailDTO.class);
+			return driverdetaildto;
+		} catch (Exception e) {
+			log.error("there is an exception in  fetching the  driver details {} ", e.getMessage());
+			return driverdetaildto;
+		}
+
+	}
+
+	
 }

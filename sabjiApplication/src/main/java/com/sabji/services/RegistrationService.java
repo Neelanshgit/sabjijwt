@@ -71,6 +71,10 @@ public class RegistrationService {
 			if (users.isPresent()) {
 				profile.setEmail(users.get().getEmail());
 				profile.setMobileno(userCode);
+				profile.setUsername(users.get().getUsername());
+				profile.setFlagofuser(users.get().getFlgOfUser());
+				profile.setAadharNo(users.get().getAadharNo());
+						
 			}
 
 			return profile;
@@ -81,4 +85,5 @@ public class RegistrationService {
 		}
 
 	}
+	
 }

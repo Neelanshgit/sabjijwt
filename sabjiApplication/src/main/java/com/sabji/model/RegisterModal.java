@@ -9,6 +9,9 @@ public class RegisterModal {
 	private String password;
 
 	private String flgOfUser;
+	private String aadharNo;
+
+	
 
 	public String getPassword() {
 		return password;
@@ -40,6 +43,11 @@ public class RegisterModal {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}public String getAadharNo() {
+		return aadharNo;
 	}
 
+	public void setAadharNo(String aadharNo) {
+		this.aadharNo = aadharNo;
+	}
 }

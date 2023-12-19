@@ -5,7 +5,7 @@ public class FarmerInfoDTO {
 	private int farmerId;
 	private String farmerName;
 	private String phoneNumber;
-
+	private String alternateNumber;
 	private String area;
 
 	private String vegCurntCarrying;
@@ -16,7 +16,7 @@ public class FarmerInfoDTO {
 
 	private String transportName;
 
-	private int farmerVisitingCount;
+	private String farmerVisitingCount;
 
 	private String sellingArea;
 
@@ -35,6 +35,25 @@ public class FarmerInfoDTO {
 	private String quest4;
 
 	private String userCode;
+	private String typeOfVisit;
+	
+	
+
+	public String getAlternateNumber() {
+		return alternateNumber;
+	}
+
+	public void setAlternateNumber(String alternateNumber) {
+		this.alternateNumber = alternateNumber;
+	}
+
+	public String getTypeOfVisit() {
+		return typeOfVisit;
+	}
+
+	public void setTypeOfVisit(String typeOfVisit) {
+		this.typeOfVisit = typeOfVisit;
+	}
 
 	public String getUserCode() {
 		return userCode;
@@ -108,11 +127,13 @@ public class FarmerInfoDTO {
 		this.transportName = transportName;
 	}
 
-	public int getFarmerVisitingCount() {
+	
+
+	public String getFarmerVisitingCount() {
 		return farmerVisitingCount;
 	}
 
-	public void setFarmerVisitingCount(int farmerVisitingCount) {
+	public void setFarmerVisitingCount(String farmerVisitingCount) {
 		this.farmerVisitingCount = farmerVisitingCount;
 	}
 

@@ -17,5 +17,5 @@ public interface FarmerInfoRepo extends JpaRepository<FarmerInfo, Integer> {
 	Long countByUserCode(String userCode);
 
 	List<FarmerInfo> findByUserCode(String userCode);
-
+	List<FarmerInfo>  findAllFarmerInfoByUserCode(String usercode);
 }

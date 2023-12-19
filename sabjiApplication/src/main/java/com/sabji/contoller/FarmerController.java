@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sabji.entity.FarmerInfo;
+
 import com.sabji.model.FarmerInfoDTO;
 import com.sabji.model.ResponseWithList;
 import com.sabji.model.ResponseWithObject;
@@ -100,5 +101,12 @@ public class FarmerController {
 		}
 
 	}
-
+	@GetMapping("/getAllFarmerByUserCode")
+	@Operation(summary = "user ke hisab se saare farmer nikal lega ")
+	public ResponseEntity<?> getAllFarmerInfoByUserCode(@RequestParam("userCode") String userCode) {
+		List<FarmerInfoDTO> farmerinfoDTOs = farmerService.findAllfarmerinfoByUserCode(userCode);
+		return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
+				farmerinfoDTOs);
+	}
 }
+

@@ -53,7 +53,7 @@ public class DriverDetailController {
 	@GetMapping("/getDriverByUserCode")
 	@Operation(summary = "ड्राईवर कोड से ड्राईवर की जानकारी निकाले ")
 	public ResponseEntity<?> getDriverDetailsByUserCode(@RequestParam("userCode") String userCode) {
-		List<DriverDetailDTO> driverDetailDTOs = driverdetailservice.findByuserCode(userCode);
+		List<DriverDetailDTO> driverDetailDTOs = driverdetailservice.findDriverDetailsByuserCode(userCode);
 		return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "",
 				driverDetailDTOs);
 	}
@@ -103,5 +103,11 @@ public class DriverDetailController {
 		}
 
 	}
-
+	@GetMapping("/getAllDriverByUserCode")
+	@Operation(summary = "saare driver ki details nikal user code ke through Gorank")
+	public ResponseEntity<?> getAllDriverDetailsByUserCode(@RequestParam("userCode") String userCode) {
+		List<DriverDetailDTO> driverDetailDTOs = driverdetailservice.findAllDriverDetailsByUserCode(userCode);
+		return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
+				driverDetailDTOs);
+	}
 }

@@ -14,7 +14,7 @@ public class DriverDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "driver_id")
-	private Long driverId;
+	private Long driverId;																																						
 
 	@Column(name = "driver_name")
 	private String driverName;
@@ -26,7 +26,10 @@ public class DriverDetails {
 	private String quantityOfVegetables;
 
 	@Column(name = "no_of_count")
-	private int roundCount;
+	private String roundCount;
+	
+	@Column(name = "times_of_rotation")
+	private String timesOfRaotation;
 
 	@Column(name = "area_of_driver")
 	private String driverArea;
@@ -36,8 +39,9 @@ public class DriverDetails {
 
 	@Column(name = "driver_ph_no")
 	private String driverNumber;
-
-	@Column(name = "user_code")
+	@Column(name="alternate_number")
+	private String alternateNumber;
+    @Column(name = "user_code")
 	private String userCode;
 
 	public Long getDriverId() {
@@ -56,13 +60,7 @@ public class DriverDetails {
 		this.driverName = driverName;
 	}
 
-	public String getdVechileName() {
-		return dVechileName;
-	}
-
-	public void setdVechileName(String dVechileName) {
-		this.dVechileName = dVechileName;
-	}
+	
 
 	public String getQuantityOfVegetables() {
 		return quantityOfVegetables;
@@ -72,11 +70,11 @@ public class DriverDetails {
 		this.quantityOfVegetables = quantityOfVegetables;
 	}
 
-	public int getRoundCount() {
+	public String getRoundCount() {
 		return roundCount;
 	}
 
-	public void setRoundCount(int roundCount) {
+	public void setRoundCount(String roundCount) {
 		this.roundCount = roundCount;
 	}
 
@@ -103,6 +101,38 @@ public class DriverDetails {
 	public void setDriverNumber(String driverNumber) {
 		this.driverNumber = driverNumber;
 	}
+	public String getAlternatenumber() {
+		return alternateNumber;
+	}
+
+	public void setAlternatenumber(String alternateNumber) {
+		this.alternateNumber = alternateNumber;
+	}
+
+
+	public String getdVechileName() {
+		return dVechileName;
+	}
+
+	public void setdVechileName(String dVechileName) {
+		this.dVechileName = dVechileName;
+	}
+
+	public String getTimesOfRaotation() {
+		return timesOfRaotation;
+	}
+
+	public void setTimesOfRaotation(String timesOfRaotation) {
+		this.timesOfRaotation = timesOfRaotation;
+	}
+
+	public String getAlternateNumber() {
+		return alternateNumber;
+	}
+
+	public void setAlternateNumber(String alternateNumber) {
+		this.alternateNumber = alternateNumber;
+	}
 
 	public String getUserCode() {
 		return userCode;
@@ -116,12 +146,12 @@ public class DriverDetails {
 	public String toString() {
 		return "DriverDetails [driverName=" + driverName + ", dVechileName=" + dVechileName + ", quantityOfVegetables="
 				+ quantityOfVegetables + ", roundCount=" + roundCount + ", driverArea=" + driverArea
-				+ ", vechileOwnerName=" + vechileOwnerName + ", driverNumber=" + driverNumber + ", userCode=" + userCode
+				+ ", vechileOwnerName=" + vechileOwnerName + ", driverNumber=" + driverNumber + ", alternatenumber=" + alternateNumber + ", userCode=" + userCode
 				+ "]";
 	}
 
-	public DriverDetails(String driverName, String dVechileName, String quantityOfVegetables, int roundCount,
-			String driverArea, String vechileOwnerName, String driverNumber, String userCode) {
+	public DriverDetails(String driverName, String dVechileName, String quantityOfVegetables, String roundCount,
+			String driverArea, String vechileOwnerName, String driverNumber, String alternateNumber, String userCode) {
 		super();
 		this.driverName = driverName;
 		this.dVechileName = dVechileName;
@@ -130,6 +160,7 @@ public class DriverDetails {
 		this.driverArea = driverArea;
 		this.vechileOwnerName = vechileOwnerName;
 		this.driverNumber = driverNumber;
+		this.alternateNumber=alternateNumber;
 		this.userCode = userCode;
 	}
 

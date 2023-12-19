@@ -11,4 +11,6 @@ public interface GdmsApiUserRepo extends JpaRepository<GdmsApiUsers, String> {
 	GdmsApiUsers findByUsername(String username);
 
 	Optional<GdmsApiUsers> findByMobileNo(String mobileno);
+
+	Optional<GdmsApiUsers> findByAadharNo(String aadharNo);
 }

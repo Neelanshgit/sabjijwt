@@ -10,39 +10,21 @@ public class DriverDetailDTO {
 
 	private String quantityOfVegetables;
 
-	private int roundCount;
+	private String roundCount;
+	
+	private String timesOfRaotation;
 
 	private String driverArea;
 
 	private String vechileOwnerName;
 
 	private String driverNumber;
-
+	private String alternateNumber;
 	private String userCode;
+	
+	
 
-	public Long getDriverId() {
-		return driverId;
-	}
-
-	public void setDriverId(Long driverId) {
-		this.driverId = driverId;
-	}
-
-	public String getUserCode() {
-		return userCode;
-	}
-
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
-	}
-
-	public String getDriverName() {
-		return driverName;
-	}
-
-	public void setDriverName(String driverName) {
-		this.driverName = driverName;
-	}
+	
 
 	public String getdVechileName() {
 		return dVechileName;
@@ -52,6 +34,32 @@ public class DriverDetailDTO {
 		this.dVechileName = dVechileName;
 	}
 
+	public String getTimesOfRaotation() {
+		return timesOfRaotation;
+	}
+
+	public void setTimesOfRaotation(String timesOfRaotation) {
+		this.timesOfRaotation = timesOfRaotation;
+	}
+
+	public Long getDriverId() {
+		return driverId;
+	}
+
+	public void setDriverId(Long driverId) {
+		this.driverId = driverId;
+	}
+
+	
+	public String getDriverName() {
+		return driverName;
+	}
+
+	public void setDriverName(String driverName) {
+		this.driverName = driverName;
+	}
+
+	
 	public String getQuantityOfVegetables() {
 		return quantityOfVegetables;
 	}
@@ -60,11 +68,11 @@ public class DriverDetailDTO {
 		this.quantityOfVegetables = quantityOfVegetables;
 	}
 
-	public int getRoundCount() {
+	public String getRoundCount() {
 		return roundCount;
 	}
 
-	public void setRoundCount(int roundCount) {
+	public void setRoundCount(String roundCount) {
 		this.roundCount = roundCount;
 	}
 
@@ -91,5 +99,19 @@ public class DriverDetailDTO {
 	public void setDriverNumber(String driverNumber) {
 		this.driverNumber = driverNumber;
 	}
+	
+	public String getAlternateNumber() {
+		return alternateNumber;
+	}
 
+	public void setAlternateNumber(String alternateNumber) {
+		this.alternateNumber = alternateNumber;
+	}
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
 }

@@ -24,7 +24,9 @@ public class FarmerInfo {
 
 	@Column(name = "farmer_phone_no")
 	private String phoneNumber;
-
+	@Column(name="alternate_Number")
+    private String alternateNumber;
+	
 	@Column(name = "selling_area")
 	private String area;
 
@@ -40,8 +42,13 @@ public class FarmerInfo {
 	@Column(name = "name_of_transport")
 	private String transportName;
 
+	
+
 	@Column(name = "counts_of_visits")
-	private int farmerVisitingCount;
+	private String farmerVisitingCount;
+	
+	@Column(name = "type_of_visits")
+	private String typeOfVisit;
 
 	@Column(name = "area_of_selling")
 	private String sellingArea;
@@ -74,7 +81,13 @@ public class FarmerInfo {
 	public void setFarmerId(int farmerId) {
 		this.farmerId = farmerId;
 	}
+	public String getAlternateNumber() {
+		return alternateNumber;
+	}
 
+	public void setAlternateNumber(String alternateNumber) {
+		this.alternateNumber = alternateNumber;
+	}
 	public String getUserCode() {
 		return userCode;
 	}
@@ -139,11 +152,13 @@ public class FarmerInfo {
 		this.distanceFromMandi = distanceFromMandi;
 	}
 
-	public int getFarmerVisitingCount() {
+	
+
+	public String getFarmerVisitingCount() {
 		return farmerVisitingCount;
 	}
 
-	public void setFarmerVisitingCount(int farmerVisitingCount) {
+	public void setFarmerVisitingCount(String farmerVisitingCount) {
 		this.farmerVisitingCount = farmerVisitingCount;
 	}
 
@@ -162,7 +177,13 @@ public class FarmerInfo {
 	public void setNameOfMandi(String nameOfMandi) {
 		this.nameOfMandi = nameOfMandi;
 	}
+	public String getTypeOfVisit() {
+		return typeOfVisit;
+	}
 
+	public void setTypeOfVisit(String typeOfVisit) {
+		this.typeOfVisit = typeOfVisit;
+	}
 	public String getVarietyOfVegetables() {
 		return varietyOfVegetables;
 	}
@@ -210,28 +231,24 @@ public class FarmerInfo {
 	public void setQuest4(String quest4) {
 		this.quest4 = quest4;
 	}
-
-	@Override
-	public String toString() {
-		return "FarmerInfo [phoneNumber=" + phoneNumber + ", area=" + area + ", vegetableQuantity=" + vegetableQuantity
-				+ ", transportName=" + transportName + ", distanceFromMandi=" + distanceFromMandi
-				+ ", farmerVisitingCount=" + farmerVisitingCount + ", sellingArea=" + sellingArea + ", nameOfMandi="
-				+ nameOfMandi + ", varietyOfVegetables=" + varietyOfVegetables + ", amountOfCommision="
-				+ amountOfCommision + ", quest1=" + quest1 + ", quest2=" + quest2 + ", quest3=" + quest3 + ", quest4="
-				+ quest4 + "]";
-	}
-
-	public FarmerInfo(String phoneNumber, String area, String vegetableQuantity, String transportName,
-			String distanceFromMandi, int farmerVisitingCount, String sellingArea, String nameOfMandi,
-			String varietyOfVegetables, String amountOfCommision, String quest1, String quest2, String quest3,
-			String quest4) {
+	public FarmerInfo(int farmerId, String userCode, String farmerName, String phoneNumber, String alternateNumber,
+			String area, String vegCurntCarrying, String vegetableQuantity, String distanceFromMandi,
+			String transportName, String farmerVisitingCount, String typeOfVisit, String sellingArea,
+			String nameOfMandi, String varietyOfVegetables, String amountOfCommision, String quest1, String quest2,
+			String quest3, String quest4) {
 		super();
+		this.farmerId = farmerId;
+		this.userCode = userCode;
+		this.farmerName = farmerName;
 		this.phoneNumber = phoneNumber;
+		this.alternateNumber = alternateNumber;
 		this.area = area;
+		this.vegCurntCarrying = vegCurntCarrying;
 		this.vegetableQuantity = vegetableQuantity;
-		this.transportName = transportName;
 		this.distanceFromMandi = distanceFromMandi;
+		this.transportName = transportName;
 		this.farmerVisitingCount = farmerVisitingCount;
+		this.typeOfVisit = typeOfVisit;
 		this.sellingArea = sellingArea;
 		this.nameOfMandi = nameOfMandi;
 		this.varietyOfVegetables = varietyOfVegetables;
@@ -240,6 +257,18 @@ public class FarmerInfo {
 		this.quest2 = quest2;
 		this.quest3 = quest3;
 		this.quest4 = quest4;
+	}
+
+	@Override
+	public String toString() {
+		return "FarmerInfo [farmerId=" + farmerId + ", userCode=" + userCode + ", farmerName=" + farmerName
+				+ ", phoneNumber=" + phoneNumber + ", alternateNumber=" + alternateNumber + ", area=" + area
+				+ ", vegCurntCarrying=" + vegCurntCarrying + ", vegetableQuantity=" + vegetableQuantity
+				+ ", distanceFromMandi=" + distanceFromMandi + ", transportName=" + transportName
+				+ ", farmerVisitingCount=" + farmerVisitingCount + ", typeOfVisit=" + typeOfVisit + ", sellingArea="
+				+ sellingArea + ", nameOfMandi=" + nameOfMandi + ", varietyOfVegetables=" + varietyOfVegetables
+				+ ", amountOfCommision=" + amountOfCommision + ", quest1=" + quest1 + ", quest2=" + quest2 + ", quest3="
+				+ quest3 + ", quest4=" + quest4 + "]";
 	}
 
 	public FarmerInfo() {

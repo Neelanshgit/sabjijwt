@@ -9,7 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.sabji.entity.FarmerInfo;
+
 import com.sabji.model.FarmerInfoDTO;
 import com.sabji.repo.FarmerInfoRepo;
 import com.sabji.util.MapperUtil;
@@ -32,13 +34,11 @@ public class FarmerService {
 			FarmerInfo farmerInfo = mapper.map(farmerInfoDTO, FarmerInfo.class);
 			farmerInfoRepo.save(farmerInfo);
 			return "Success";
-
 		} catch (Exception e) {
 			log.error("there is an exception in  registring the user {} ", e.getMessage());
 			return "Error";
 		}
-
-	}
+}
 
 	public FarmerInfoDTO getFarmerData(@Valid FarmerInfoDTO farmerInfoDTO) {
 
@@ -104,6 +104,20 @@ public class FarmerService {
 			log.error("there is an exception in  getting the farmer {} ", e.getMessage());
 			return farmerInfoDTOs;
 		}
+		
 	}
+	public List<FarmerInfoDTO> findAllfarmerinfoByUserCode(String userCode) {
+		List<FarmerInfoDTO> farmerinfodto = new ArrayList<>();
+		try {
+			List<FarmerInfo> farmerinfo = farmerInfoRepo.findAllFarmerInfoByUserCode(userCode);
+			farmerinfodto = mapperUtil.mapList(farmerinfo, FarmerInfoDTO.class);
+			return farmerinfodto;
+		} catch (Exception e) {
+			log.error("there is an exception in  fetching the  driver details {} ", e.getMessage());
+			return farmerinfodto;
+		}
+
+	}
+
 
 }

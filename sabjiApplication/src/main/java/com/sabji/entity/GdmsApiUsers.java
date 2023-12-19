@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "API_USERS")
 
 public class GdmsApiUsers {
-
+   
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
@@ -21,7 +21,6 @@ public class GdmsApiUsers {
 	private String username;
 	@Column(name = "PASSWORD")
 	private String password;
-
 	@Column(name = "FLG_OF_USER")
 	private String flgOfUser;
 	@Column(name = "DATE_OF_USERCREATION")
@@ -31,17 +30,15 @@ public class GdmsApiUsers {
 	private String mobileNo;// mobile no
 	@Column(name = "email")
 	private String email;
+	@Column(name="aadhar_no")  // aadharno
+	private String aadharNo;
 
 	@Column(name = "user_status")
 	private String userstatus;// email
 
-	public String getUserstatus() {
-		return userstatus;
-	}
+	
 
-	public void setUserstatus(String userstatus) {
-		this.userstatus = userstatus;
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -97,6 +94,21 @@ public class GdmsApiUsers {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getAadharNo() {
+		return aadharNo;
+	}
+
+	public void setAadharNo(String aadharNo) {
+		this.aadharNo = aadharNo;
+	}
+
+	public String getUserstatus() {
+		return userstatus;
+	}
+
+	public void setUserstatus(String userstatus) {
+		this.userstatus = userstatus;
 	}
 
 }

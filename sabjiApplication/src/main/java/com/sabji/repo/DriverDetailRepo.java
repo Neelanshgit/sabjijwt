@@ -17,5 +17,6 @@ public interface DriverDetailRepo extends JpaRepository<DriverDetails, Long> {
 	DriverDetails findByDriverArea(String area);
 
 	Long countByUserCode(String userCode);
+	List<DriverDetails>  findAllByUserCode(String usercode);
 
 }
