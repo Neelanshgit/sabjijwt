@@ -60,6 +60,7 @@ public class ProfileModel {
 
 
 	public String getFlagofuser() {
+		
 		return flagofuser;
 	}
 
