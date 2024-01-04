@@ -3,7 +3,7 @@ package com.sabji.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
+
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class VendorService {
 	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(VendorService.class);
 
 	
-	public String saveVendorData(@Valid VendorModel vendormodel) {
+	public String saveVendorData( VendorModel vendormodel) {
 
 		try {
 			VendorEntity vendor = mapper.map(vendormodel, VendorEntity.class);

@@ -13,6 +13,10 @@ public class VendorModel {
 	 private String mandiPriority;
 	 private String mandiVisit;
 	 private String vegetableVariety;
+	 
+	 
+	 
+	 
 	 public String getUserCode() {
 			return userCode;
 		}
@@ -25,10 +29,6 @@ public class VendorModel {
 	public void setAlternateNumber(String alternateNumber) {
 		this.alternateNumber = alternateNumber;
 	}
-	
-	 
-	 
-	
 	
 	public Long getVendorId() {
 		return vendorId;
