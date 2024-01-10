@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sabji.entity.DriverDetails;
+
 import com.sabji.model.DriverDetailDTO;
+import com.sabji.model.ResponseWithList;
 import com.sabji.model.ResponseWithObject;
 import com.sabji.services.DriverDetailService;
 import com.sabji.services.VehcileService;
@@ -109,5 +112,14 @@ public class DriverDetailController {
 		List<DriverDetailDTO> driverDetailDTOs = driverdetailservice.findAllDriverDetailsByUserCode(userCode);
 		return new ResponseWithObject().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
 				driverDetailDTOs);
+	}
+	@GetMapping("findAllDrivers")
+	@Operation(summary = "find all the drivers")
+	public ResponseEntity<?> findDriver() {
+
+		List<DriverDetails> driverdetails = driverdetailservice.getallDriverDetails();
+
+		return new ResponseWithList().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200",
+				driverdetails);
 	}
 }

@@ -86,6 +86,9 @@ public class DriverDetailService {
 		}
 
 	}
-
+   public List<DriverDetails> getallDriverDetails()
+   {
+	   return driverdetailrepo.findAll();
+   }
 	
 }

@@ -3,16 +3,38 @@ package com.sabji.model;
 public class ProfileModel {
 
 	private String mobileno;
+	private String name;
+	private String dateofbirth;
+
 
 	private String email;
 	private String username;
 	private String aadharNo;
 	 
 	
-	private String flagofuser;
+	private String flagofUser;
 
 
-	
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getDateofbirth() {
+		return dateofbirth;
+	}
+
+
+	public void setDateofbirth(String dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+
 
 
 	public String getEmail() {
@@ -59,13 +81,13 @@ public class ProfileModel {
 	}
 
 
-	public String getFlagofuser() {
-		return flagofuser;
+	public String getFlagofUser() {
+		return flagofUser;
 	}
 
 
-	public void setFlagofuser(String flagofuser) {
-		this.flagofuser = flagofuser;
+	public void setFlagofUser(String flagofUser) {
+		this.flagofUser = flagofUser;
 	} 
 
 	

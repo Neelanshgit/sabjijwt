@@ -17,12 +17,19 @@ public class GdmsApiUsers {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
+
+
 	@Column(name = "USERNAME")
 	private String username;
+	@Column(name="date_of_birth")
+	private String dateofbirth;
+	
+	@Column(name="full_name")
+	private String name;
 	@Column(name = "PASSWORD")
 	private String password;
 	@Column(name = "FLG_OF_USER")
-	private String flgOfUser;
+	private String flagofUser;
 	@Column(name = "DATE_OF_USERCREATION")
 	private LocalDate dateOfCreation;
 	@Id
@@ -64,12 +71,12 @@ public class GdmsApiUsers {
 		this.password = password;
 	}
 
-	public String getFlgOfUser() {
-		return flgOfUser;
+	public String getFlagofUser() {
+		return flagofUser;
 	}
 
-	public void setFlgOfUser(String flgOfUser) {
-		this.flgOfUser = flgOfUser;
+	public void setFlagofUser(String flagofUser) {
+		this.flagofUser = flagofUser;
 	}
 
 	public LocalDate getDateOfCreation() {
@@ -78,6 +85,13 @@ public class GdmsApiUsers {
 
 	public void setDateOfCreation(LocalDate dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getMobileNo() {
@@ -90,6 +104,13 @@ public class GdmsApiUsers {
 
 	public String getEmail() {
 		return email;
+	}
+	public String getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(String dateofbirth) {
+		this.dateofbirth = dateofbirth;
 	}
 
 	public void setEmail(String email) {

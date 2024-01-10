@@ -83,4 +83,43 @@ public class JwtTokenUtil implements Serializable {
 				.signWith(SignatureAlgorithm.HS512, secret).compact();
 
 	}
+	public String doExpiryToken(Map<String, Object> claims, String subject) {
+
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000*0))
+				.signWith(SignatureAlgorithm.HS512, secret).compact();
+
+	}
+	public String destroyToken(String token)
+	{
+		  try
+		  {
+			  return invalidateToken(token);
+		  } catch(Exception e)
+		  {
+			  return token;
+		  }
+		  
+	}
+	private String invalidateToken(String token)
+	{
+		 try {
+		        // Parse the token to get its claims
+		        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+
+		       
+		        claims.setExpiration(new Date(0));
+
+		        
+		       return  Jwts.builder()
+		                .setClaims(claims)
+		                .signWith(SignatureAlgorithm.HS512, secret)
+		                .compact();
+
+		        
+		    } catch (Exception e) {
+		        // Handle the exception (e.g., token parsing error)
+		        return token; // Return the original token if an error occurs
+		    }
+	}
 }

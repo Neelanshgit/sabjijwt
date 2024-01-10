@@ -1,7 +1,10 @@
 package com.sabji.services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -68,12 +71,15 @@ public class RegistrationService {
 		try {
 
 			Optional<GdmsApiUsers> users = gdmsApiUserRepo.findByMobileNo(userCode);
+			
 			if (users.isPresent()) {
 				profile.setEmail(users.get().getEmail());
 				profile.setMobileno(userCode);
 				profile.setUsername(users.get().getUsername());
-				profile.setFlagofuser(users.get().getFlgOfUser());
+				profile.setFlagofUser(users.get().getFlagofUser());
 				profile.setAadharNo(users.get().getAadharNo());
+				profile.setName(users.get().getName());
+				profile.setDateofbirth(users.get().getDateofbirth());
 						
 			}
 
@@ -85,5 +91,40 @@ public class RegistrationService {
 		}
 
 	}
+	/*public String  getProfileName(String userCode)
+	{
+		Optional <GdmsApiUsers> optionprofile=gdmsApiUserRepo.findProfileByUserCode(userCode);
+		   
+	       if(optionprofile.isPresent())
+	       {
+		   return optionprofile.get().getName();
+	       }
+	       else
+	       {
+	    	   System.out.println("User is not found  with usercode :" +userCode);
+	    	   return null;
+	       }
+		
+	}*/
+	public List<ProfileModel> getAllProfiles()
+	{
+		List<GdmsApiUsers> gdmsApiUsers=gdmsApiUserRepo.findAll();
+	       List<ProfileModel> pro=new ArrayList<>();
+		try {
+			 if (!gdmsApiUsers.isEmpty()) {
+		            
+				 pro= gdmsApiUsers.stream()
+			                .map(user -> mapper.map(user, ProfileModel.class))
+			                .collect(Collectors.toList());
+			    //pro=  mapper.map(gdmsApiUsers.get(), ProfileModel.class);
+			 }
+			
+      } catch (Exception e) {
+			log.error("there is an exception in  registring the user {} ", e.getMessage());
+		}
+		return pro;
+	}
+	
+	
 	
 }

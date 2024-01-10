@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,11 +14,13 @@ import com.sabji.entity.FarmerInfoEntity;
 import com.sabji.entity.Items;
 import com.sabji.entity.VegetableEntity;
 import com.sabji.model.BasicDetailsDTO;
+import com.sabji.repo.VegetableRepo;
 
 @Service
 public interface ItemService {
 
 //	public Items itemservice(Items items);
+	
 
 	public BasicDetailsDTO itemservice(BasicDetailsDTO basicDetailsDTO);
 
@@ -40,7 +43,7 @@ public interface ItemService {
 	public List<FarmerInfoEntity> getallFarmardetail();
 
 	public List<VegetableEntity> getallVegetableDetail();
-
+	
 	public List<Items> getItemsById();
 
 	public List<FarmerInfoEntity> getFarmerdetailById();

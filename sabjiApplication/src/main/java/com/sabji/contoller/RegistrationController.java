@@ -1,11 +1,14 @@
 package com.sabji.contoller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sabji.model.ProfileModel;
 import com.sabji.model.RegisterModal;
 import com.sabji.model.Response2;
+import com.sabji.model.ResponseWithList;
 import com.sabji.model.ResponseWithObject;
 import com.sabji.services.RegistrationService;
 import com.sabji.util.AppConstants;
@@ -48,7 +52,6 @@ public class RegistrationController {
 				return Response2.generateResponse("Successfully register", HttpStatus.OK, "200");
 			}
 		}
-
 	}
 
 	@PostMapping(value = "/profileData")
@@ -61,6 +64,32 @@ public class RegistrationController {
 			return new ResponseWithObject().generateResponse("NA", HttpStatus.NOT_FOUND, "200", profile);
 		}
 
+	}
+	/*@PostMapping(value="/profiledataByUserCode")
+	public ResponseEntity<String>  getprofileName(String userCode)
+	{
+		String profilename=registrationService.getProfileName(userCode);
+		if (profilename != null) {
+			return ResponseEntity.ok("Profile Name: " + profilename);
+		} else {
+			return  ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("User not found with user code: " + userCode);
+		}
+		
+	}*/
+	@GetMapping(value="/findprofile")
+	public ResponseEntity<?> getAllProfile() 
+	{
+          
+	         List<ProfileModel> pro=registrationService.getAllProfiles();
+		     if(pro!=null)
+		     {
+		    	 return new ResponseWithList().generateResponse(AppConstants.SUCCESSSTATUS, HttpStatus.OK, "200", pro);
+			 }
+		     else
+		     {
+		 	return new ResponseWithList().generateResponse("NA", HttpStatus.NOT_FOUND, "200", pro);
+		     }
 	}
 
 }

@@ -3,12 +3,13 @@ package com.sabji.model;
 public class RegisterModal {
 
 	private String mobileno;
-
+	private String name;
+   private String dateofbirth;
 	private String email;
 
 	private String password;
 
-	private String flgOfUser;
+	private String flagOfUser;
 	private String aadharNo;
 
 	
@@ -21,12 +22,12 @@ public class RegisterModal {
 		this.password = password;
 	}
 
-	public String getFlgOfUser() {
-		return flgOfUser;
+	public String getFlagOfUser() {
+		return flagOfUser;
 	}
 
-	public void setFlgOfUser(String flgOfUser) {
-		this.flgOfUser = flgOfUser;
+	public void setFlagOfUser(String flagOfUser) {
+		this.flagOfUser = flagOfUser;
 	}
 
 	public String getMobileno() {
@@ -35,6 +36,23 @@ public class RegisterModal {
 
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
+	}
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(String dateofbirth) {
+		this.dateofbirth = dateofbirth;
 	}
 
 	public String getEmail() {

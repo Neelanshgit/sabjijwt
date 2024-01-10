@@ -53,7 +53,7 @@ public class GetController {
 
 	}
 
-	@GetMapping("/findVegatable")
+	@GetMapping("/findAllVegatable")
 	public ResponseEntity<?> findVegatableDetail() {
 
 		List<VegetableEntity> vegetableEntities = itemService.getallVegetableDetail();
@@ -112,5 +112,8 @@ public class GetController {
 
 		return new ResponseWithObject().generateResponse("provide", HttpStatus.OK, "200", count);
 	}
+	
+	
+	
 
 }

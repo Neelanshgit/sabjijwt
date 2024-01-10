@@ -36,7 +36,7 @@ public class TestController {
 		GdmsApiUsers apiUsers = new GdmsApiUsers();
 		apiUsers.setUsername("7275431268");
 		apiUsers.setPassword(encoder.encode("password"));
-		apiUsers.setFlgOfUser("A");
+		apiUsers.setFlagofUser("A");
 		GdmsApiUserRepo.save(apiUsers);
 
 		return "success";

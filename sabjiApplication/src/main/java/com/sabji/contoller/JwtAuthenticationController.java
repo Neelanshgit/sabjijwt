@@ -99,6 +99,25 @@ public class JwtAuthenticationController {
 			return ResponseForToken.generateResponse(token, HttpStatus.OK, "200");
 		}
 	}
+	@GetMapping(value = "/logout")
+	public ResponseEntity<?> logout(HttpServletRequest request) throws Exception {
+		// From the HttpRequest get the claims
+		DefaultClaims claims = (io.jsonwebtoken.impl.DefaultClaims) request.getAttribute("claims");
+		if (claims == null) {
+			return Response2.generateResponse("Token is already invalid ", HttpStatus.UNAUTHORIZED, "000");
+		} else {
+			Map<String, Object> expectedMap = getMapFromIoJsonwebtokenClaims(claims);
+			String invalidatetoken = jwtTokenUtil.doExpiryToken(expectedMap, expectedMap.get("sub").toString());
+			 try {
+		            String destroyedToken = jwtTokenUtil.destroyToken(invalidatetoken);
+		            return ResponseForToken.generateResponse(destroyedToken, HttpStatus.OK, "200");
+		        } catch (Exception e) {
+		            // Handle the exception (e.g., log it) or return an appropriate response
+		            return Response2.generateResponse("Token destruction failed", HttpStatus.INTERNAL_SERVER_ERROR, "500");
+		        }
+		    }
+	}
+	
 
 	private void authenticate(String username, String password) {
 		Objects.requireNonNull(username);
